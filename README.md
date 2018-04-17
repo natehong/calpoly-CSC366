@@ -1,4 +1,4 @@
-# calpoly-CSC366
+# calpoly-csc366-program1
 
 # group name: JAPJI AND THE DATABAES
 # members: Nathan Hong, Derek Lung, Patrick Malapira
