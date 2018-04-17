@@ -1,3 +1,5 @@
+--Subject to change as program requirements change or become more defined
+
 CREATE TABLE customers (
    login VARCHAR(25) NOT NULL,
    password VARCHAR(50) NOT NULL,
