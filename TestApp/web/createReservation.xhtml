@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Creating a Reservation</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p>Create New Reservation</p>
+            <p>Start Date:
+                <h:inputText value="" id="startDate" required="true"></h:inputText>
+            </p>
+            <p>End Date:
+                <h:inputText value="" id="endDate" required="true"></h:inputText>
+            </p>
+            <p>View:
+                <h:selectManyMenu value="viewType" id="viewType" required="true">
+                    <f:selectItem itemValue="Ocean" itemLabel="Ocean" />
+                    <f:selectItem itemValue="Pool" itemLabel="Pool"/>
+                </h:selectManyMenu>
+            </p>
+            <p>Room Type:
+                <h:selectManyMenu value="roomType" id="roomType" required="true">
+                    <f:selectItem itemValue="Single" itemLabel="Single" />
+                    <f:selectItem itemValue="Double" itemLabel="Double"/>
+                    <f:selectItem itemValue="Queen" itemLabel="Queen" />
+                    <f:selectItem itemValue="King" itemLabel="King"/>                    
+                </h:selectManyMenu>            
+            </p>
+            <h:commandButton value="Submit Reservation" action="checkRoomAvail"></h:commandButton>
+        </h:form>
+    </h:body>
+</html>
+

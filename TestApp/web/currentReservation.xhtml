@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Users current reservation </title>
+    </h:head>
+    <h:body>
+        <p>Here are your current reservations </p>
+        <h:dataTable value = "Current Resrvations" var = "reservations"
+            styleClass = "reservationsTable"
+            headerClass = "reservationsTableHeader"
+            rowClasses ="reservationsTableOddRow, reservationsTableEvenRow">
+
+            <h:column>    				
+                <f:facet name = "header">Reservation No.</f:facet>
+            </h:column>   
+            <h:column>    				
+                <f:facet name = "header">Start Date</f:facet>
+            </h:column>
+            <h:column>
+                <f:facet name = "header">End Date</f:facet>
+            </h:column>
+            <h:column>
+                <f:facet name = "header">View Type</f:facet>
+            </h:column>
+            <h:column>
+                <f:facet name = "header">Room Type</f:facet>
+            </h:column>
+        </h:dataTable>
+        <h:form>
+            <p>Reservation No:
+                <h:inputText value="" id="cancelReqId" required="true"></h:inputText>
+                <h:commandButton value="Cancel Reservation" action="cancelReservation"></h:commandButton>
+            </p>
+        </h:form>
+    </h:body>
+</html>
+
