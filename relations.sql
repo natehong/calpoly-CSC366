@@ -37,8 +37,25 @@ CREATE TABLE reservations (
    check_out DATE NOT NULL,
    room INT NOT NULL,
    customer VARCHAR(25) NOT NULL,
-   charge NUMERIC(5,2),
+   charge NUMERIC(5,2) CHECK (cost > 0),
    PRIMARY KEY (res_code),
    FOREIGN KEY (room) REFERENCES rooms (room_code),
    FOREIGN KEY(customer) REFERENCES customers (login)
+);
+<<<<<<< HEAD
+
+CREATE TABLE charges (
+   charge_code INT NOT NULL,
+   description VARCHAR(50) NOT NULL,
+   cost NUMERIC(5,2),
+   PRIMARY KEY (charge_code)
+);
+
+CREATE TABLE special_room_charges (
+   special_charge_code INT NOT NULL,
+   room INT CHECK (room_code > 101) NOT NULL,
+   res_date DATE NOT NULL,
+   cost NUMERIC(5,2) CHECK (cost > 0) NOT NULL,
+   PRIMARY KEY (special_charge_code),
+   FOREIGN KEY (room) REFERENCES rooms (room_code)
 );
