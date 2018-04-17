@@ -48,9 +48,14 @@ CREATE TABLE special_room_charges (
 );
 
 CREATE TABLE invoices (
+   invoice_code INT CHECK (invoice_code > 0) NOT NULL,
    reservation INT NOT NULL,  --reservation code
+   charge_date DATE NOT NULL,
    charge INT NOT NULL,
    quantity INT CHECK (quantity > 0) NOT NULL,
+   PRIMARY KEY (invoice_code),
+   FOREIGN KEY (reservation) REFERENCES reservations (res_code),
+   FOREIGN KEY (charge) REFERENCES extra_charges (charge_code)
 );
 
 CREATE TABLE reservations (
