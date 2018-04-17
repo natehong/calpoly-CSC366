@@ -42,7 +42,6 @@ CREATE TABLE reservations (
    FOREIGN KEY (room) REFERENCES rooms (room_code),
    FOREIGN KEY(customer) REFERENCES customers (login)
 );
-<<<<<<< HEAD
 
 CREATE TABLE charges (
    charge_code INT NOT NULL,
