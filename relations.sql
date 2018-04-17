@@ -31,7 +31,7 @@ CREATE TABLE rooms (
    PRIMARY KEY (room_code)
 );
 
-CREATE TABLE extra_charges (
+CREATE TABLE additional_charges (
    charge_code INT NOT NULL,
    description VARCHAR(50) NOT NULL,
    cost NUMERIC(5,2) NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE reservations (
    FOREIGN KEY(customer) REFERENCES customers (login)
 );
 
-CREATE TABLE invoices (
+CREATE TABLE additional_charges_invoices (
    invoice_code INT CHECK (invoice_code > 0) NOT NULL,
    reservation INT NOT NULL,
    charge_date DATE NOT NULL,
@@ -69,4 +69,11 @@ CREATE TABLE invoices (
    FOREIGN KEY (charge) REFERENCES extra_charges (charge_code)
 );
 
-CREATE TABLE 
+CREATE TABLE room_charge_history (
+   room_charge_id INT CHECK (room_charge_id > 0) NOT NULL,
+   reservation INT CHECK (reservation > 0) NOT NULL,
+   res_date DATE NOT NULL,
+   room_cost NUMERIC(5,2) NOT NULL,
+   PRIMARY KEY (room_charge_id),
+   FOREIGN KEY (reservation) REFERENCES reservations (res_code)
+);
