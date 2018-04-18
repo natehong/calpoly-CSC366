@@ -10,26 +10,23 @@
         <h:form>
             <p>Create New Reservation</p>
             <p>Start Date:
-                <h:inputText value="" id="startDate" required="true"></h:inputText>
+                <h:inputText value="#{selector.startDate}" id="startDate" required="true"></h:inputText>
             </p>
             <p>End Date:
-                <h:inputText value="" id="endDate" required="true"></h:inputText>
+                <h:inputText value="#{selector.endDate}" id="endDate" required="true"></h:inputText>
             </p>
             <p>View:
-                <h:selectManyMenu value="viewType" id="viewType" required="true">
-                    <f:selectItem itemValue="Ocean" itemLabel="Ocean" />
-                    <f:selectItem itemValue="Pool" itemLabel="Pool"/>
-                </h:selectManyMenu>
+                <h:selectOneMenu value="#{selector.viewChoice}">
+                    <f:selectItems value="#{selector.viewChoices}"/>
+                </h:selectOneMenu>
             </p>
+            
             <p>Room Type:
-                <h:selectManyMenu value="roomType" id="roomType" required="true">
-                    <f:selectItem itemValue="Single" itemLabel="Single" />
-                    <f:selectItem itemValue="Double" itemLabel="Double"/>
-                    <f:selectItem itemValue="Queen" itemLabel="Queen" />
-                    <f:selectItem itemValue="King" itemLabel="King"/>                    
-                </h:selectManyMenu>            
+                <h:selectOneMenu value="#{selector.roomChoice}">
+                    <f:selectItems value="#{selector.roomChoices}"/>
+                </h:selectOneMenu>           
             </p>
-            <h:commandButton value="Submit Reservation" action="checkRoomAvail"></h:commandButton>
+            <h:commandButton value="Submit Reservation" action="#{selector.transition}"></h:commandButton>
         </h:form>
     </h:body>
 </html>

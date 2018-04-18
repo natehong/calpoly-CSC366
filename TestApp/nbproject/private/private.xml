@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Patrick/Documents/NetBeansProjects/TestApp/web/UserHomepage.xhtml</file>
-            <file>file:/C:/Users/Patrick/Documents/NetBeansProjects/TestApp/web/createReservation.xhtml</file>
-            <file>file:/C:/Users/Patrick/Documents/NetBeansProjects/TestApp/web/currentReservation.xhtml</file>
-            <file>file:/C:/Users/Patrick/Documents/NetBeansProjects/TestApp/web/NewUserPg.xhtml</file>
-            <file>file:/C:/Users/Patrick/Documents/NetBeansProjects/TestApp/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Patrick/Documents/NetBeansProjects/TestApp/web/WEB-INF/faces-config.xml</file>
-            <file>file:/C:/Users/Patrick/Documents/NetBeansProjects/TestApp/web/index.xhtml</file>
+            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/package/DBConnect.java</file>
+            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/web/createReservation.xhtml</file>
+            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/package/Selector.java</file>
         </group>
     </open-files>
 </project-private>
