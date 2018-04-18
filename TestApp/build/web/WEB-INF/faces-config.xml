@@ -15,6 +15,11 @@
             <to-view-id>UserHomepage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>TempAdmin</from-outcome>
+            <to-view-id>AdminHomePage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <from-view-id>/UserHomepage.xhtml</from-view-id>
@@ -26,6 +31,24 @@
         <navigation-case>
             <from-outcome>createRsvr</from-outcome>
             <to-view-id>createReservation.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/AdminHomePage.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>createEmpl</from-outcome>
+            <to-view-id>createEmployee.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>changeUsrPwd</from-outcome>
+            <to-view-id>changeUserPassword.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>alterRoomPrice</from-outcome>
+            <to-view-id>alterRoomPrice.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
