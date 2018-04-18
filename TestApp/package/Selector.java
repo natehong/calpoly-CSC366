@@ -17,7 +17,7 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 
-public class Selector {
+public class Selector implements Serializable {
     
     private String startDate;
     private String endDate;

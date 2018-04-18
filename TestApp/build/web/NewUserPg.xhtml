@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>New User</title>
     </h:head>
@@ -9,30 +10,44 @@
         <h:form>
             <p>Create New Account:</p>
             <p>Login:
-                <h:inputText value="newUserLogin" id="Username" required="true"></h:inputText>
+                <h:inputText value="#{createCustomer.login}" id="Username" required="true"></h:inputText>
             </p>
             <p>Password:
-                <h:inputText value="newUserPassword" id="Password" required="true"></h:inputText>
+                <h:inputText value="#{createCustomer.password}" id="Password" required="true"></h:inputText>
             </p>
             <p>First Name:
-                <h:inputText value="newUserLastName" id="FirstName" required="true"></h:inputText>
+                <h:inputText value="#{createCustomer.firstName}" id="FirstName" required="true"></h:inputText>
             </p>
             <p>Last Name:
-                <h:inputText value="newUserFirstName" id="LastName" required="true"></h:inputText>
+                <h:inputText value="#{createCustomer.lastName}" id="LastName" required="true"></h:inputText>
             </p>
             <p>Email:
-                <h:inputText value="newUserEmail" id="Email" required="true"></h:inputText>
+                <h:inputText value="#{createCustomer.email}" id="Email" required="true"></h:inputText>
             </p>
-            <p>Address:
-                <h:inputText value="newUserAddress" id="Address" required="true"></h:inputText>
+            <p>Street Number:
+                <h:inputText value="#{createCustomer.streetNum}" id="StreetNumber" required="true" converterMessage="Please enter digits only."></h:inputText>
+            </p>
+            <p>Street:
+                <h:inputText value="#{createCustomer.street}" id="Street" required="true"></h:inputText>
+            </p>
+            <p>City:
+                <h:inputText value="#{createCustomer.city}" id="City" required="true"></h:inputText>
+            </p>
+            <p>Zipcode:
+                <h:inputText value="#{createCustomer.zipcode}" id="Zipcode" required="true" converterMessage="Please enter digits only."></h:inputText>
             </p>
             <p>Credit Card:
-                <h:inputText value="newUserCreditCard" id="CreditCard" required="true"></h:inputText>
+                <h:inputText value="#{createCustomer.creditCard}" id="CreditCard" required="true" converterMessage="Please enter digits only."></h:inputText>
+            </p>
+            <p>Expiration Date:
+                <h:inputText value="#{createCustomer.expDate}" id="ExpirationDate" required="true">
+                    <f:convertDateTime pattern="mm-yy"/>
+                </h:inputText>
             </p>
             <p>CRC:
-                <h:inputText value="newUserCRC" id="CRC" required="true"></h:inputText>
+                <h:inputText value="#{createCustomer.crc}" id="CRC" required="true" converterMessage="Please enter digits only."></h:inputText>
             </p>
-            <h:commandButton value="Create Account" action="createNU"></h:commandButton>
+            <h:commandButton value="Create Account" action="#{createCustomer.createAccount}"></h:commandButton>
         </h:form>
     </h:body>
 </html>

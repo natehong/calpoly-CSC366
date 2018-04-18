@@ -18,8 +18,8 @@ public class DBConnect {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(
-                    "jdbc:postgresql://ambari-head.csc.calpoly.edu:5432/japji", "japji",
-                    "nathan"); //not actual password
+                    "jdbc:postgresql://localhost:5432/postgres", "postgres",
+                    "postgres"); //not actual password
         } catch (SQLException e) {
             System.out.println("Connection Failed! Check output console");
             e.printStackTrace();
