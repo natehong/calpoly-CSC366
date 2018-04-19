@@ -1,0 +1,2 @@
+--given (check in, check out, view, bed type) list available rooms
+--
