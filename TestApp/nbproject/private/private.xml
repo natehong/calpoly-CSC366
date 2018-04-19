@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Patrick/Documents/NetBeansProjects/Pull/web/alterRoomPrice.xhtml</file>
-            <file>file:/C:/Users/Patrick/Documents/NetBeansProjects/Pull/web/NewUserPg.xhtml</file>
-            <file>file:/C:/Users/Patrick/Documents/NetBeansProjects/Pull/web/UserHomepage.xhtml</file>
-            <file>file:/C:/Users/Patrick/Documents/NetBeansProjects/Pull/package/SpecialRoom.java</file>
-            <file>file:/C:/Users/Patrick/Documents/NetBeansProjects/Pull/package/CreateCustomer.java</file>
-            <file>file:/C:/Users/Patrick/Documents/NetBeansProjects/Pull/package/Admin.java</file>
+            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/package/Login.java</file>
+            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/web/createReservation.xhtml</file>
+            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/package/CreateEmployee.java</file>
+            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/package/Selector.java</file>
+            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/package/CreateCustomer.java</file>
         </group>
     </open-files>
 </project-private>

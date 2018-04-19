@@ -5,9 +5,17 @@
  */
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Date;
+import javax.faces.application.FacesMessage;
 import javax.inject.Named;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.validator.ValidatorException;
 
 /**
  *
@@ -19,26 +27,28 @@ import javax.faces.bean.SessionScoped;
 
 public class Selector implements Serializable {
     
-    private String startDate;
-    private String endDate;
+    private Date startDate;
+    private Date endDate;
     private String viewChoice;
     private String roomChoice;
     
     private String[] viewChoices = {"Pool", "Ocean"};
     private String[] roomChoices = {"Single", "Double", "Queen", "King"};
     
-    public String getStartDate() {
+    private DBConnect dbConnect = new DBConnect();
+    
+    public Date getStartDate() {
         return startDate;
     }
-    public void setStartDate(String choice) {
+    public void setStartDate(Date choice) {
         this.startDate = choice;
     }
     
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
     
-    public void setEndDate(String choice) {
+    public void setEndDate(Date choice) {
         this.endDate = choice;
     }
     
@@ -65,7 +75,39 @@ public class Selector implements Serializable {
         this.roomChoice = choice;
     }
     
-    public void transition() {
-        System.out.println(startDate);
+    public void createReservation() throws SQLException {
+        int ID;
+        int room = 0;
+        Connection con = dbConnect.getConnection();
+
+        if (con == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        
+        Statement statement = con.createStatement();
+        
+        con.setAutoCommit(false);
+        
+        PreparedStatement getID = con.prepareStatement(
+            "SELECT res_code FROM reservations ORDER BY res_code DESC");
+        
+        PreparedStatement createRes = con.prepareStatement(
+             "INSERT INTO reservations VALUES(?,?,?,?,?)");
+        
+        ResultSet rsID = getID.executeQuery();
+        ID = (rsID.next()) ? rsID.getInt("res_code") + 1 : 1;
+        
+        createRes.setInt(1, ID);
+        createRes.setDate(2, new java.sql.Date(startDate.getTime()));
+        createRes.setDate(3, new java.sql.Date(endDate.getTime()));
+        createRes.setInt(4, room);
+        createRes.setString(5, "");
+
+        createRes.executeUpdate();
+
+        statement.close();
+        con.commit();
+        con.close();
+
     }
 }

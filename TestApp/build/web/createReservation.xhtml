@@ -10,10 +10,14 @@
         <h:form>
             <p>Create New Reservation</p>
             <p>Start Date:
-                <h:inputText value="#{selector.startDate}" id="startDate" required="true"></h:inputText>
+                <h:inputText value="#{selector.startDate}" id="startDate" required="true">
+                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                </h:inputText>
             </p>
             <p>End Date:
-                <h:inputText value="#{selector.endDate}" id="endDate" required="true"></h:inputText>
+                <h:inputText value="#{selector.endDate}" id="endDate" required="true">
+                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                </h:inputText>
             </p>
             <p>View:
                 <h:selectOneMenu value="#{selector.viewChoice}">
@@ -26,7 +30,9 @@
                     <f:selectItems value="#{selector.roomChoices}"/>
                 </h:selectOneMenu>           
             </p>
-            <h:commandButton value="Submit Reservation" action="#{selector.transition}"></h:commandButton>
+            <h:commandButton value="Submit Reservation" 
+                             action="#{selector.createReservation}">
+            </h:commandButton>
         </h:form>
     </h:body>
 </html>

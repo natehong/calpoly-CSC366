@@ -13,7 +13,7 @@ CREATE TABLE customers (
    city VARCHAR(50),
    zip_code INT CHECK (zip_code > 0),
    credit_card BIGINT CHECK (credit_card > 0),  -- only one credit card can be held on an individual account at a time
-   exp_date DATE,
+   exp_date DATE NOT NULL,
    crc_code INT CHECK (crc_code > 0),
    PRIMARY KEY (login)
 );
@@ -21,6 +21,8 @@ CREATE TABLE customers (
 -- simple list of employees
 CREATE TABLE employees (
    emp_id INT CHECK (emp_id > 0) NOT NULL,
+   login VARCHAR(25) NOT NULL,
+   password VARCHAR(25) NOT NULL,
    first_name VARCHAR(25) NOT NULL,
    last_name VARCHAR(25) NOT NULL,
    PRIMARY KEY (emp_id)
@@ -47,7 +49,7 @@ CREATE TABLE additional_charges (
 -- will be the first place to look for room price
 CREATE TABLE special_room_rates (
    special_rate_code INT NOT NULL,
-   room INT CHECK (room_code > 101) NOT NULL,
+   room INT CHECK (room > 101) NOT NULL,
    book_date DATE NOT NULL,
    rate NUMERIC(5,2) CHECK (rate > 0) NOT NULL,
    PRIMARY KEY (special_rate_code),
@@ -76,7 +78,7 @@ CREATE TABLE additional_charges_invoices (
    quantity INT CHECK (quantity > 0) NOT NULL,  -- when multiple identical charges made to a reservation on the same day
    PRIMARY KEY (invoice_code),
    FOREIGN KEY (reservation) REFERENCES reservations (res_code),
-   FOREIGN KEY (charge) REFERENCES extra_charges (charge_code)
+   FOREIGN KEY (charge) REFERENCES additional_charges (charge_code)
 );
 
 -- this will keep track of when a reservation is made, what was the room charge for each day

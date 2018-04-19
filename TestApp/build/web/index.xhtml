@@ -9,14 +9,21 @@
         Customer Login
         <h:form>
             <p>Username:
-                <h:inputText value="Name" id="Username" required="true"></h:inputText>
+                <h:inputText value="#{login.username}" 
+                             binding="#{login.loginUI}"
+                             required="false"
+                             id="Username"></h:inputText>
             </p>
             <p>Password:
-                <h:inputText value="Password" id="Password" required="true"></h:inputText>
+                <h:inputText value="#{login.password}"
+                             required="false" 
+                             validatorMessage="Login/Password incorrect"
+                             validator="#{login.validate}"
+                             id="Password" ></h:inputText>
             </p>
-            <h:commandButton value="Login" action="Login"></h:commandButton>
-            <h:commandButton value="New User" action="CreateNewAcct"></h:commandButton>
-            <h:commandButton value="TempAdmin" action="TempAdmin"></h:commandButton>
+            <h:commandButton value="Login" action="#{login.go}"></h:commandButton>
+            <h:commandButton value="New User" action="CreateNewAcct" immediate="true"></h:commandButton>
+            <h:commandButton value="TempAdmin" action="TempAdmin" immediate="true"></h:commandButton>
         </h:form>
     </h:body>
 </html>

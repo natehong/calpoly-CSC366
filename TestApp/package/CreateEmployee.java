@@ -8,8 +8,8 @@
 
 import java.io.Serializable;
 import java.sql.Connection;
-import java.util.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.inject.Named;
@@ -74,6 +74,7 @@ public class CreateEmployee implements Serializable {
     }
     
     public String createEmployee() throws SQLException {
+        int ID;
         Connection con = dbConnect.getConnection();
 
         if (con == null) {
@@ -83,21 +84,28 @@ public class CreateEmployee implements Serializable {
         
         Statement statement = con.createStatement();
         
-        PreparedStatement createAcc = con.prepareStatement(
-            "INSERT INTO customers VALUES(?,?,?,?,?)");
+        PreparedStatement getID = con.prepareStatement(
+            "SELECT emp_id FROM employees ORDER BY emp_id DESC");
         
-        createAcc.setInt(1, emplID);
-        createAcc.setString(2, login);
-        createAcc.setString(3, password);
-        createAcc.setString(4, firstName);
-        createAcc.setString(5, lastName);
+        ResultSet rsID = getID.executeQuery();
+
+        ID = (rsID.next()) ? rsID.getInt("emp_id") + 1 : 1;
         
-        createAcc.executeUpdate();
+        PreparedStatement createEmp = con.prepareStatement(
+            "INSERT INTO employees VALUES(?,?,?,?,?)");
+        
+        createEmp.setInt(1, ID);
+        createEmp.setString(2, login);
+        createEmp.setString(3, password);
+        createEmp.setString(4, firstName);
+        createEmp.setString(5, lastName);
+        
+        createEmp.executeUpdate();
         statement.close();
         con.commit();
         con.close();
         
-        return "index";
+        return "AdminHomePage";
     }
 }
 
