@@ -59,8 +59,11 @@ public class Login implements Serializable {
         this.password = password;
     }
     
-    public void validate(FacesContext context, UIComponent component, 
-            Object value) throws ValidatorException, SQLException {
+    public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException, SQLException {
+        // this functions validates username and login
+        // does not return anything but will throw an exception if the user
+        // uses an incorrect login
+        // the exception will print an error message on the page definded by validator message
         String pass;
         Connection con = dbConnect.getConnection();
 
@@ -96,8 +99,8 @@ public class Login implements Serializable {
         }
     }
 
-    
     public String go() {
+        // login success go to home page
         return "UserHomepage";
     }
 

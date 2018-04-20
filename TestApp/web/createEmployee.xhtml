@@ -9,7 +9,12 @@
         <p>Create New Employee</p>
         <h:form>
             <p>Login:
-                <h:inputText value="#{createEmployee.login}" id="Username" required="true"></h:inputText>
+                <h:inputText value="#{createEmployee.login}" 
+                             validatorMessage="Login already taken"
+                             validator="#{createEmployee.validate}"
+                             id="Username" 
+                             required="true">
+                </h:inputText>
             </p>
             <p>Password:
                 <h:inputText value="#{createEmployee.password}" id="Password" required="true"></h:inputText>
