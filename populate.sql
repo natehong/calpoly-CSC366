@@ -7,11 +7,11 @@ VALUES
 
 INSERT INTO employees (emp_id, password, first_name, last_name)
 VALUES
-(1, 'password1', 'f1', 'l1'),
-(2, 'password2', 'f2', 'l2'),
-(3, 'password3', 'f3', 'l3'),
-(4, 'password4', 'f4', 'l4'),
-(5, 'password5', 'f5', 'l5');
+(11111, 'password1', 'f1', 'l1'),
+(22222, 'password2', 'f2', 'l2'),
+(33333, 'password3', 'f3', 'l3'),
+(44444, 'password4', 'f4', 'l4'),
+(55555, 'password5', 'f5', 'l5');
 
 INSERT INTO rooms (room_code, ocean_view, bed_type, base_price)
 VALUES
