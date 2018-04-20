@@ -21,7 +21,6 @@ CREATE TABLE customers (
 -- simple list of employees
 CREATE TABLE employees (
    emp_id INT CHECK (emp_id > 0) NOT NULL,
-   login VARCHAR(25) NOT NULL,
    password VARCHAR(25) NOT NULL,
    first_name VARCHAR(25) NOT NULL,
    last_name VARCHAR(25) NOT NULL,
@@ -29,7 +28,7 @@ CREATE TABLE employees (
 );
 
 CREATE TABLE rooms (
-   room_code INT CHECK (room_code > 101) NOT NULL, -- 'xyz' - x = floor, yz = room
+   room_code INT CHECK (room_code >= 101) NOT NULL, -- 'xyz' - x = floor, yz = room
    ocean_view BOOLEAN NOT NULL,  -- ocean view = true / pool view = false
    bed_type VARCHAR(15) NOT NULL,   -- twin queen or single queen
    base_price NUMERIC(5,2) NOT NULL,   -- java program will look here when no special prices are indicated
