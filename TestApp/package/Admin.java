@@ -31,25 +31,25 @@ import javax.faces.validator.ValidatorException;
 
 public class Admin implements Serializable {
     
-    private String currLogin, currPassword;
-    private String newLogin, newPassword;
-    private UIInput currNameUI, newNameUI, newPassUI;
+    private int emp_id;
+    private String currPassword, newPassword;
+    private UIInput emp_idUI, newPassUI;
     private DBConnect dbConnect = new DBConnect();
-    
-    public UIInput getCurrNameUI() {
-        return currNameUI;
+
+    public int getEmp_id() {
+        return emp_id;
     }
 
-    public void setCurrNameUI(UIInput currNameUI) {
-        this.currNameUI = currNameUI;
+    public void setEmp_id(int emp_id) {
+        this.emp_id = emp_id;
     }
 
-    public UIInput getNewNameUI() {
-        return newNameUI;
+    public UIInput getEmp_idUI() {
+        return emp_idUI;
     }
 
-    public void setNewNameUI(UIInput newNameUI) {
-        this.newNameUI = newNameUI;
+    public void setEmp_idUI(UIInput emp_idUI) {
+        this.emp_idUI = emp_idUI;
     }
 
     public UIInput getNewPassUI() {
@@ -59,15 +59,7 @@ public class Admin implements Serializable {
     public void setNewPassUI(UIInput newPassUI) {
         this.newPassUI = newPassUI;
     }
-   
-    public String getCurrLogin(){
-        return currLogin;
-    }
-    
-    public void setCurrLogin(String currLogin){
-        this.currLogin = currLogin;
-    }
-    
+
     public String getCurrPassword(){
         return currPassword;
     }
@@ -75,44 +67,13 @@ public class Admin implements Serializable {
     public void setCurrPassword(String currPassword){
         this.currPassword = currPassword;
     }
-    
-    public String getNewLogin(){
-        return newLogin;
-    }
-    
-    public void setNewLogin(String newLogin){
-        this.newLogin = newLogin;
-    }
-    
+        
     public String getNewPassword(){
         return newPassword;
     }
     
     public void setNewPassword(String newPassword){
         this.newPassword = newPassword;
-    }
-    
-    public void changeUsername() throws SQLException {
-        Connection con = dbConnect.getConnection();
-        
-        if (con == null) {
-         throw new SQLException("Can't get database connection");
-        }
-        con.setAutoCommit(false);
-        
-        Statement statement = con.createStatement();
-        
-        PreparedStatement changeUsername = con.prepareStatement(
-            "UPDATE employees SET login = ? WHERE login = ?");
-        
-        changeUsername.setString(1, newNameUI.getValue().toString());
-        changeUsername.setString(2, currNameUI.getValue().toString());
-
-        
-        changeUsername.executeUpdate();
-        statement.close();
-        con.commit();
-        con.close();
     }
     
     public void changePassword() throws SQLException {
@@ -126,10 +87,10 @@ public class Admin implements Serializable {
         Statement statement = con.createStatement();
         
         PreparedStatement changeUsername = con.prepareStatement(
-            "UPDATE employees SET password = ? WHERE login = ?");
+            "UPDATE employees SET password = ? WHERE emp_id = ?");
         
         changeUsername.setString(1, newPassUI.getValue().toString());
-        changeUsername.setString(2, currNameUI.getValue().toString());
+        changeUsername.setInt(2, (Integer) emp_idUI.getValue());
 
         
         changeUsername.executeUpdate();
@@ -143,7 +104,8 @@ public class Admin implements Serializable {
         // does not return anything but will throw an exception if the user
         // uses an incorrect login
         // the exception will print an error message on the page definded by validator message
-        String name, passLocal, pass;
+        Integer id;
+        String passLocal, pass;
         Connection con = dbConnect.getConnection();
 
         if (con == null) {
@@ -152,12 +114,12 @@ public class Admin implements Serializable {
         con.setAutoCommit(false);
                 
         PreparedStatement validateAcc = con.prepareStatement(
-            "SELECT login, password FROM employees WHERE login = ?");
+            "SELECT emp_id, password FROM employees WHERE emp_id = ?");
         
-        name = currNameUI.getValue().toString();
+        id = (Integer) emp_idUI.getValue();
         passLocal = value.toString();
         
-        validateAcc.setString(1, name);
+        validateAcc.setInt(1, id);
 
         ResultSet rs = validateAcc.executeQuery();
 

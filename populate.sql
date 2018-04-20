@@ -81,13 +81,13 @@ VALUES
 (511, 'false', 'double queen', 100),
 (512, 'false', 'single king', 100);
 
-INSERT INTO additonal_charges (charge_code, description, cost)
+INSERT INTO additional_charges (charge_code, description, cost)
 VALUES
 (1, 'wifi', 10),
 (2, 'breakfast', 15),
-(1, 'dry clean', 17),
-(1, 'pool', 5),
-(1, 'paperview', 7);
+(3, 'dry clean', 17),
+(4, 'pool', 5),
+(5, 'paperview', 7);
 
 -- only ocean view rooms on the top two floors gets price bumps
 INSERT INTO special_room_rates (special_rate_code, room, book_date, rate)
@@ -142,8 +142,7 @@ VALUES
 
 INSERT INTO reservations (res_code, check_in, check_out, room, customer)
 VALUES
-(1, '2018-01-03', '2018-01-05', 201, nh),
-(2, '2018-03-03', '2018-03-04', 311, dl),
-(3, '2018-07-03', '2018-07-05', 412, pl),
-(4, '2018-11-20', '2018-11-21', 506, js);
-
+(1, '2018-01-03', '2018-01-05', 201, 'nh'),
+(2, '2018-03-03', '2018-03-04', 311, 'dl'),
+(3, '2018-07-03', '2018-07-05', 412, 'pm'),
+(4, '2018-11-20', '2018-11-21', 506, 'js');

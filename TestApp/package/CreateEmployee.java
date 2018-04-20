@@ -78,6 +78,8 @@ public class CreateEmployee implements Serializable {
     }
     
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException, SQLException {
+        // dont needs this function???
+        
         // this functions validates the username
         // does not return anything but will throw an exception if the user
         // uses an incorrect login
@@ -125,13 +127,12 @@ public class CreateEmployee implements Serializable {
         ID = (rsID.next()) ? rsID.getInt("emp_id") + 1 : 1;
         
         PreparedStatement createEmp = con.prepareStatement(
-            "INSERT INTO employees VALUES(?,?,?,?,?)");
+            "INSERT INTO employees VALUES(?,?,?,?)");
         
         createEmp.setInt(1, ID);
-        createEmp.setString(2, login);
-        createEmp.setString(3, password);
-        createEmp.setString(4, firstName);
-        createEmp.setString(5, lastName);
+        createEmp.setString(2, password);
+        createEmp.setString(3, firstName);
+        createEmp.setString(4, lastName);
         
         createEmp.executeUpdate();
         statement.close();

@@ -149,12 +149,9 @@ public class CreateCustomer implements Serializable {
         con.setAutoCommit(false);
                 
         PreparedStatement validateLogin = con.prepareStatement(
-            "SELECT login FROM customers WHERE login = ?"
-                    + "UNION "
-                    + "SELECT login FROM employees WHERE login = ?");
+            "SELECT login FROM customers WHERE login = ?");
         
         validateLogin.setString(1, value.toString());
-        validateLogin.setString(2, value.toString());
         
         ResultSet rs = validateLogin.executeQuery();
 

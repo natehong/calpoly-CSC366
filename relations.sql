@@ -64,7 +64,7 @@ CREATE TABLE reservations (
    customer VARCHAR(25) NOT NULL,
    PRIMARY KEY (res_code),
    FOREIGN KEY (room) REFERENCES rooms (room_code),
-   FOREIGN KEY(customer) REFERENCES customers (login)
+   FOREIGN KEY (customer) REFERENCES customers (login)
 );
 
 -- keeps track of any additional charges added to a particular reservation
