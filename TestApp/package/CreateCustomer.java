@@ -8,11 +8,16 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.util.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.faces.application.FacesMessage;
 import javax.inject.Named;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 
 /**
  *
@@ -131,6 +136,35 @@ public class CreateCustomer implements Serializable {
         this.crc = crc;
     }
  
+    public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException, SQLException {
+        // this functions validates the username
+        // does not return anything but will throw an exception if the user
+        // uses an incorrect login
+        // the exception will print an error message on the page definded by validator message
+        Connection con = dbConnect.getConnection();
+
+        if (con == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        con.setAutoCommit(false);
+                
+        PreparedStatement validateLogin = con.prepareStatement(
+            "SELECT login FROM customers WHERE login = ?"
+                    + "UNION "
+                    + "SELECT login FROM employees WHERE login = ?");
+        
+        validateLogin.setString(1, value.toString());
+        validateLogin.setString(2, value.toString());
+        
+        ResultSet rs = validateLogin.executeQuery();
+
+        if(rs.next())
+        {
+            FacesMessage errorMessage = new FacesMessage("Login taken");
+            throw new ValidatorException(errorMessage);
+        }
+    }
+    
     public String createAccount() throws SQLException {
         Connection con = dbConnect.getConnection();
 

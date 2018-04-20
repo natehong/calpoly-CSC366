@@ -12,14 +12,16 @@
                 <h:inputText value="#{login.username}" 
                              binding="#{login.loginUI}"
                              required="false"
-                             id="Username"></h:inputText>
+                             id="Username">
+                </h:inputText>
             </p>
             <p>Password:
                 <h:inputText value="#{login.password}"
                              required="false" 
                              validatorMessage="Login/Password incorrect"
                              validator="#{login.validate}"
-                             id="Password" ></h:inputText>
+                             id="Password" >
+                </h:inputText>
             </p>
             <h:commandButton value="Login" action="#{login.go}"></h:commandButton>
             <h:commandButton value="New User" action="CreateNewAcct" immediate="true"></h:commandButton>

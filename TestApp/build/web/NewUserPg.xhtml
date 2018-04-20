@@ -10,7 +10,12 @@
         <h:form>
             <p>Create New Account:</p>
             <p>Login:
-                <h:inputText value="#{createCustomer.login}" id="Username" required="true"></h:inputText>
+                <h:inputText value="#{createCustomer.login}" 
+                             validatorMessage="Login already taken"
+                             validator="#{createCustomer.validate}"
+                             id="Username" 
+                             required="true">
+                </h:inputText>
             </p>
             <p>Password:
                 <h:inputText value="#{createCustomer.password}" id="Password" required="true"></h:inputText>
