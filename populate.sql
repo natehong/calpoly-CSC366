@@ -85,9 +85,9 @@ INSERT INTO additonal_charges (charge_code, description, cost)
 VALUES
 (1, 'wifi', 10),
 (2, 'breakfast', 15),
-(1, 'dry clean', 17),
-(1, 'pool', 5),
-(1, 'paperview', 7);
+(3, 'dry clean', 17),
+(4, 'pool', 5),
+(5, 'paperview', 7);
 
 -- only ocean view rooms on the top two floors gets price bumps
 INSERT INTO special_room_rates (special_rate_code, room, book_date, rate)
@@ -144,6 +144,26 @@ INSERT INTO reservations (res_code, check_in, check_out, room, customer)
 VALUES
 (1, '2018-01-03', '2018-01-05', 201, nh),
 (2, '2018-03-03', '2018-03-04', 311, dl),
-(3, '2018-07-03', '2018-07-05', 412, pl),
+(3, '2018-07-03', '2018-07-05', 401, pl),
 (4, '2018-11-20', '2018-11-21', 506, js);
 
+INSERT INTO additonal_charges_invoices (invoice_code, reservation, charge_date, charge, quantity)
+VALUES
+(1, 1, '2018-01-03', 1, 1),
+(2, 1, '2018-01-04', 1, 1),
+(3, 1, '2018-01-05', 1, 1),
+(4, 2, '2018-03-03', 2, 2),
+(5, 2, '2018-03-04', 3, 1);
+
+INSERT INTO room_rate_history (rate_id, reservation, res_date, rate)
+VALUES
+(1, 1, '2018-01-03', 100),
+(2, 1, '2018-01-04', 100),
+(3, 1, '2018-01-05', 100),
+(4, 2, '2018-03-03', 100),
+(5, 2, '2018-03-04', 100),
+(6, 3, '2018-07-03', 100),
+(7, 3, '2018-07-04', 165), -- special price
+(8, 3, '2018-07-05', 100),
+(9, 4, '2018-11-20', 100),
+(10, 4, '2018-11-21', 100);
