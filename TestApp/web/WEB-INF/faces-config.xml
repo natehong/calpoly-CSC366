@@ -5,6 +5,11 @@
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     <navigation-rule>
         <from-view-id>/index.xhtml</from-view-id>
+         <navigation-case>
+            <from-outcome>EmpLogin</from-outcome>
+            <to-view-id>EmployeeLogin.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
         <navigation-case>
             <from-outcome>CreateNewAcct</from-outcome>
             <to-view-id>NewUserPg.xhtml</to-view-id>
@@ -21,6 +26,21 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/EmployeeLogin.xhtml</from-view-id>
+         <navigation-case>
+            <from-outcome>UserLogin</from-outcome>
+            <to-view-id>index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Login</from-outcome>
+            <to-view-id>EmployeeHomepage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
     <navigation-rule>
         <from-view-id>/UserHomepage.xhtml</from-view-id>
         <navigation-case>
@@ -34,6 +54,7 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
+    
     <navigation-rule>
         <from-view-id>/AdminHomePage.xhtml</from-view-id>
         <navigation-case>

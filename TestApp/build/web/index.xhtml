@@ -19,9 +19,12 @@
                 <h:inputText value="#{login.password}"
                              required="false" 
                              validatorMessage="Login/Password incorrect"
-                             validator="#{login.validate}"
+                             validator="#{login.validateUsr}"
                              id="Password" >
                 </h:inputText>
+            </p>
+            <p> 
+                <h:link value = "Employee Login" outcome = "EmpLogin" />
             </p>
             <h:commandButton value="Login" action="#{login.go}"></h:commandButton>
             <h:commandButton value="New User" action="CreateNewAcct" immediate="true"></h:commandButton>

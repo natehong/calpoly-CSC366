@@ -100,7 +100,7 @@ public class Admin implements Serializable {
     }
     
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException, SQLException {
-        // this functions validates username and login
+        // this functions validates emp_id and password
         // does not return anything but will throw an exception if the user
         // uses an incorrect login
         // the exception will print an error message on the page definded by validator message

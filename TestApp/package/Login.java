@@ -59,7 +59,7 @@ public class Login implements Serializable {
         this.password = password;
     }
     
-    public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException, SQLException {
+    public void validateUsr(FacesContext context, UIComponent component, Object value) throws ValidatorException, SQLException {
         // this functions validates username and login
         // does not return anything but will throw an exception if the user
         // uses an incorrect login
@@ -98,10 +98,49 @@ public class Login implements Serializable {
             throw new ValidatorException(errorMessage);
         }
     }
+    
+    public void validateEmp(FacesContext context, UIComponent component, Object value) throws ValidatorException, SQLException {
+        // this functions validates username and login
+        // does not return anything but will throw an exception if the user
+        // uses an incorrect login
+        // the exception will print an error message on the page definded by validator message
+        String pass;
+        Connection con = dbConnect.getConnection();
 
+        if (con == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        con.setAutoCommit(false);
+                
+        PreparedStatement validateAcc = con.prepareStatement(
+            "SELECT emp_id, password FROM employees WHERE emp_id = ?");
+        
+        username = loginUI.getValue().toString();
+        password = value.toString();
+        
+        validateAcc.setString(1, username);
+
+        ResultSet rs = validateAcc.executeQuery();
+
+        if(rs.next())
+        {
+            pass = rs.getString("password");
+            if(!password.equals(pass)) {     // password validates with login
+                FacesMessage errorMessage = new FacesMessage("Wrong login/password");
+                throw new ValidatorException(errorMessage);
+            }
+        }
+        else if(username.equals("") && password.equals("")) {
+            
+        }
+        else {
+            FacesMessage errorMessage = new FacesMessage("Wrong login/password");
+            throw new ValidatorException(errorMessage);
+        }
+    }
     public String go() {
         // login success go to home page
-        return "UserHomepage";
+        return "Login";
     }
 
 }
