@@ -7,11 +7,11 @@ VALUES
 
 INSERT INTO employees (emp_id, password, first_name, last_name)
 VALUES
-(1, 'password1', 'f1', 'l1'),
-(2, 'password2', 'f2', 'l2'),
-(3, 'password3', 'f3', 'l3'),
-(4, 'password4', 'f4', 'l4'),
-(5, 'password5', 'f5', 'l5');
+(11111, 'password1', 'f1', 'l1'),
+(22222, 'password2', 'f2', 'l2'),
+(33333, 'password3', 'f3', 'l3'),
+(44444, 'password4', 'f4', 'l4'),
+(55555, 'password5', 'f5', 'l5');
 
 INSERT INTO rooms (room_code, ocean_view, bed_type, base_price)
 VALUES
@@ -142,7 +142,28 @@ VALUES
 
 INSERT INTO reservations (res_code, check_in, check_out, room, customer)
 VALUES
-(1, '2018-01-03', '2018-01-05', 201, 'nh'),
-(2, '2018-03-03', '2018-03-04', 311, 'dl'),
-(3, '2018-07-03', '2018-07-05', 412, 'pm'),
-(4, '2018-11-20', '2018-11-21', 506, 'js');
+(1, '2018-01-03', '2018-01-05', 201, nh),
+(2, '2018-03-03', '2018-03-04', 311, dl),
+(3, '2018-07-03', '2018-07-05', 401, pm),
+(4, '2018-11-20', '2018-11-21', 506, js);
+
+INSERT INTO additonal_charges_invoices (invoice_code, reservation, charge_date, charge, quantity)
+VALUES
+(1, 1, '2018-01-03', 1, 1),
+(2, 1, '2018-01-04', 1, 1),
+(3, 1, '2018-01-05', 1, 1),
+(4, 2, '2018-03-03', 2, 2),
+(5, 2, '2018-03-04', 3, 1);
+
+INSERT INTO room_rate_history (rate_id, reservation, res_date, rate)
+VALUES
+(1, 1, '2018-01-03', 100),
+(2, 1, '2018-01-04', 100),
+(3, 1, '2018-01-05', 100),
+(4, 2, '2018-03-03', 100),
+(5, 2, '2018-03-04', 100),
+(6, 3, '2018-07-03', 100),
+(7, 3, '2018-07-04', 165), -- special price
+(8, 3, '2018-07-05', 100),
+(9, 4, '2018-11-20', 100),
+(10, 4, '2018-11-21', 100);
