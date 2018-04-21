@@ -142,12 +142,12 @@ VALUES
 
 INSERT INTO reservations (res_code, check_in, check_out, room, customer)
 VALUES
-(1, '2018-01-03', '2018-01-05', 201, nh),
-(2, '2018-03-03', '2018-03-04', 311, dl),
-(3, '2018-07-03', '2018-07-05', 401, pm),
-(4, '2018-11-20', '2018-11-21', 506, js);
+(1, '2018-01-03', '2018-01-05', 201, 'nh'),
+(2, '2018-03-03', '2018-03-04', 311, 'dl'),
+(3, '2018-07-03', '2018-07-05', 401, 'pm'),
+(4, '2018-11-20', '2018-11-21', 506, 'js');
 
-INSERT INTO additonal_charges_invoices (invoice_code, reservation, charge_date, charge, quantity)
+INSERT INTO additional_charges_invoices (invoice_code, reservation, charge_date, charge, quantity)
 VALUES
 (1, 1, '2018-01-03', 1, 1),
 (2, 1, '2018-01-04', 1, 1),
