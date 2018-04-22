@@ -36,7 +36,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>Login</from-outcome>
-            <to-view-id>EmployeeHomepage.xhtml</to-view-id>
+            <to-view-id>EmployeeHomePage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -70,6 +70,15 @@
         <navigation-case>
             <from-outcome>alterRoomPrice</from-outcome>
             <to-view-id>alterRoomPrice.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+        <navigation-rule>
+        <from-view-id>/createReservation.xhtml</from-view-id>
+         <navigation-case>
+            <from-outcome>selectRes</from-outcome>
+            <to-view-id>selectReservation.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

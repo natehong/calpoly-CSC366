@@ -9,16 +9,16 @@
         Employee Login
         <h:form>
             <p>Emp_ID
-                <h:inputText value="#{login.username}" 
+                <h:inputText value="#{login.emp_id}" 
                              binding="#{login.loginUI}"
                              required="false"
-                             id="Username">
+                             id="Emp_ID">
                 </h:inputText>
             </p>
             <p>Password:
                 <h:inputText value="#{login.password}"
                              required="false" 
-                             validatorMessage="Login/Password incorrect"
+                             validatorMessage="ID/Password incorrect"
                              validator="#{login.validateEmp}"
                              id="Password" >
                 </h:inputText>

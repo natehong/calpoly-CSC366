@@ -31,6 +31,8 @@ import javax.faces.validator.ValidatorException;
 public class Login implements Serializable {
 
     private String username, password;
+    private int emp_id;
+    
     private DBConnect dbConnect = new DBConnect();
     
     private UIInput loginUI;
@@ -41,6 +43,14 @@ public class Login implements Serializable {
 
     public void setLoginUI(UIInput loginUI) {
         this.loginUI = loginUI;
+    }
+       
+    public int getEmp_id() {
+        return emp_id;
+    }
+
+    public void setEmp_id(int emp_id) {
+        this.emp_id = emp_id;
     }
     
     public String getUsername() {
@@ -115,10 +125,10 @@ public class Login implements Serializable {
         PreparedStatement validateAcc = con.prepareStatement(
             "SELECT emp_id, password FROM employees WHERE emp_id = ?");
         
-        username = loginUI.getValue().toString();
+        emp_id = (Integer) loginUI.getValue();
         password = value.toString();
         
-        validateAcc.setString(1, username);
+        validateAcc.setInt(1, emp_id);
 
         ResultSet rs = validateAcc.executeQuery();
 
@@ -126,15 +136,15 @@ public class Login implements Serializable {
         {
             pass = rs.getString("password");
             if(!password.equals(pass)) {     // password validates with login
-                FacesMessage errorMessage = new FacesMessage("Wrong login/password");
+                FacesMessage errorMessage = new FacesMessage("Wrong id/password");
                 throw new ValidatorException(errorMessage);
             }
         }
-        else if(username.equals("") && password.equals("")) {
+        else if(emp_id == 0 && password.equals("")) {
             
         }
         else {
-            FacesMessage errorMessage = new FacesMessage("Wrong login/password");
+            FacesMessage errorMessage = new FacesMessage("Wrong id/password");
             throw new ValidatorException(errorMessage);
         }
     }
