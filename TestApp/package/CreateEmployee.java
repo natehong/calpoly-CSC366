@@ -32,7 +32,7 @@ import javax.faces.validator.ValidatorException;
 public class CreateEmployee implements Serializable {
     
     private int emplID;
-    private String login, password;
+    private String password;
     private String firstName, lastName;
     
     private DBConnect dbConnect = new DBConnect();
@@ -45,13 +45,6 @@ public class CreateEmployee implements Serializable {
         this.emplID = emplID;
     }
     
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
 
     public String getPassword() {
         return password;

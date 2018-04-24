@@ -3,12 +3,34 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/package/Reservations.java</file>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/web/selectReservation.xhtml</file>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/package/Customer.java</file>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/web/createReservation.xhtml</file>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/web/WEB-INF/faces-config.xml</file>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/package/CreateCustomer.java</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/createAdditionalCharge.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/alterRoomPrice.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/changeUserPassword.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/EmployeeHomePage.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/WEB-INF/faces-config.xml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/AdminHomePage.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/package/Customer.java</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/package/SpecialRoom.java</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/UserHomepage.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/package/CreateEmployee.java</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/additionalChargeMenu.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/package/CreateCustomer.java</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/package/Employee.java</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/selectReservation.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/createReservation.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/package/AdditionalCharges.java</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/NewUserPg.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/package/Reservations.java</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/package/Login.java</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/Items.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/viewAvailableRooms.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/package/Item.java</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/index.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/EmployeeLogin.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/customerCheckout.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/package/DBConnect.java</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/currentReservation.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/createEmployee.xhtml</file>
         </group>
     </open-files>
 </project-private>

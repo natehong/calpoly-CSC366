@@ -42,6 +42,30 @@
     </navigation-rule>
     
     <navigation-rule>
+        <from-view-id>/EmployeeHomePage.xhtml</from-view-id>
+         <navigation-case>
+            <from-outcome>checkout</from-outcome>
+            <to-view-id>checkoutCustomer.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>addCharge</from-outcome>
+            <to-view-id>createAdditionalCharge.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>viewAvailableRooms</from-outcome>
+            <to-view-id>viewAvailableRooms.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>createItem</from-outcome>
+            <to-view-id>Items.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
         <from-view-id>/UserHomepage.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>checkRsvr</from-outcome>
@@ -51,6 +75,11 @@
         <navigation-case>
             <from-outcome>createRsvr</from-outcome>
             <to-view-id>createReservation.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>newCharge</from-outcome>
+            <to-view-id>additionalChargeMenu.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -70,6 +99,11 @@
         <navigation-case>
             <from-outcome>alterRoomPrice</from-outcome>
             <to-view-id>alterRoomPrice.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>createItem</from-outcome>
+            <to-view-id>Items.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

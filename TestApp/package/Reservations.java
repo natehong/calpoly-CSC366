@@ -31,10 +31,13 @@ import javax.faces.validator.ValidatorException;
 
 public class Reservations implements Serializable {
     
+    private int reservationID;
     private Date startDate;
     private Date endDate;
     private String viewChoice;
     private String roomChoice;
+    private int roomNumber;
+    private int total;
     
     private String[] viewChoices = {"Pool", "Ocean"};
     private String[] roomChoices = {"double queen", "single king"};
@@ -79,6 +82,13 @@ public class Reservations implements Serializable {
         }
 
     }
+    public int getReservationID() {
+        return reservationID;
+    }
+    public void setReservationID(int reservationID) {
+        this.reservationID = reservationID;
+    }
+    
     public Date getStartDate() {
         return startDate;
     }
@@ -115,6 +125,17 @@ public class Reservations implements Serializable {
     
     public void setRoomChoice(String choice) {
         this.roomChoice = choice;
+    }
+    
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+    
+    public int getTotal(){
+        return total;
     }
     
     public String getName() {
@@ -171,6 +192,8 @@ public class Reservations implements Serializable {
         }
         return "selectRes";
     }
+    
+    public void checkout(){}    
     
 //    public void createReservation() throws SQLException {
 //        int ID;

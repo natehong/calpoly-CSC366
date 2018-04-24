@@ -8,8 +8,11 @@
     <h:body>
         <h1>Hello User: #{customer.customer}</h1>
         <h:form>
+            <p>Current total for stay: #{reservations.total}</p>
+            <p>Day left until stay:</p>
             <h:commandButton value="check/canecl Reservation" action="checkRsvr"></h:commandButton>
             <h:commandButton value="create Reservation" action="createRsvr"></h:commandButton>
+            <h:commandButton value="Add additional charge" action="newCharge"></h:commandButton>
         </h:form>
     </h:body>
 </html>
