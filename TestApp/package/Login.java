@@ -6,11 +6,9 @@
 
 import java.io.Serializable;
 import java.sql.Connection;
-import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javax.faces.application.FacesMessage;
 import javax.inject.Named;
 import javax.faces.bean.ManagedBean;
@@ -30,8 +28,8 @@ import javax.faces.validator.ValidatorException;
 @SessionScoped
 public class Login implements Serializable {
 
-    private String username, password;
-    private int emp_id;
+    private String username = "", password = "";
+    private int emp_id = 0;
     
     private DBConnect dbConnect = new DBConnect();
     

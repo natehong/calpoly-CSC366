@@ -38,23 +38,27 @@ public class Reservations implements Serializable {
     private String roomChoice;
     private int roomNumber;
     private int total;
+    private int ind;
+    
     
     private String[] viewChoices = {"Pool", "Ocean"};
     private String[] roomChoices = {"double queen", "single king"};
     
     private List<Reservation> reservations;
-    
+    private List<Integer> listIndex;
+
     private DBConnect dbConnect = new DBConnect();
     
     public class Reservation implements Serializable {
-        private int room;
+        private int room, index;
         private boolean ocean_view;
         private String bed_type;
         
-        public Reservation(int room, boolean ocean_view, String bed_type) {
+        public Reservation(int room, boolean ocean_view, String bed_type, int index) {
             this.room = room;
             this.ocean_view = ocean_view;
             this.bed_type = bed_type;
+            this.index = index;
         }
         
         public int getRoom() {
@@ -80,8 +84,24 @@ public class Reservations implements Serializable {
         public void setBed_type(String bed_type) {
             this.bed_type = bed_type;
         }
+        
+        public int getIndex() {
+            return index;
+        }
 
+        public void setIndex(int index) {
+            this.index = index;
+        }
     }
+    
+    public int getInd() {
+        return ind;
+    }
+
+    public void setInd(int ind) {
+        this.ind = ind;
+    }
+    
     public int getReservationID() {
         return reservationID;
     }
@@ -148,7 +168,16 @@ public class Reservations implements Serializable {
         return reservations;
     }
     
+    public List<Integer> getListIndex() {
+        return listIndex;
+    }
+
+    public void setListIndex(List<Integer> listIndex) {
+        this.listIndex = listIndex;
+    }
+    
     public String findReservation() throws SQLException {
+        int index = 0;
         boolean view = false;
         if(viewChoice.equals("Ocean"))
             view = true;
@@ -186,49 +215,53 @@ public class Reservations implements Serializable {
 
         ResultSet rs = findRes.executeQuery();
         reservations = new ArrayList<>();
+        listIndex = new ArrayList<>();
         while(rs.next())
         {
-            reservations.add(new Reservation(rs.getInt("room_code"), rs.getBoolean("ocean_view"), rs.getString("bed_type")));
+            reservations.add(new Reservation(rs.getInt("room_code"), rs.getBoolean("ocean_view"), rs.getString("bed_type"), index));
+            listIndex.add(index);
+            index++;
         }
         return "selectRes";
     }
     
     public void checkout(){}    
     
-//    public void createReservation() throws SQLException {
-//        int ID;
-//        int room = 0;
-//        Connection con = dbConnect.getConnection();
-//
-//        if (con == null) {
-//            throw new SQLException("Can't get database connection");
-//        }
-//        
-//        Statement statement = con.createStatement();
-//        
-//        con.setAutoCommit(false);
-//        
-//        PreparedStatement getID = con.prepareStatement(
-//            "SELECT res_code FROM reservations ORDER BY res_code DESC");
-//        
-//        PreparedStatement createRes = con.prepareStatement(
-//             "INSERT INTO reservations VALUES(?,?,?,?,?)");
-//    
-//        
-//        ResultSet rsID = getID.executeQuery();
-//        ID = (rsID.next()) ? rsID.getInt("res_code") + 1 : 1;
-//        
-//        createRes.setInt(1, ID);
-//        createRes.setDate(2, new java.sql.Date(startDate.getTime()));
-//        createRes.setDate(3, new java.sql.Date(endDate.getTime()));
-//        createRes.setInt(4, room);
-//        createRes.setString(5, getName());
-//
-//        createRes.executeUpdate();
-//
-//        statement.close();
-//        con.commit();
-//        con.close();
-//
-//    }
+    public void createReservation() throws SQLException {
+        int ID;
+        int room = 0;
+        Connection con = dbConnect.getConnection();
+
+        if (con == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        
+        Statement statement = con.createStatement();
+        
+        con.setAutoCommit(false);
+        
+        PreparedStatement getID = con.prepareStatement(
+            "SELECT res_code FROM reservations ORDER BY res_code DESC");
+        
+        PreparedStatement createRes = con.prepareStatement(
+             "INSERT INTO reservations VALUES(?,?,?,?,?)");
+    
+        
+        ResultSet rsID = getID.executeQuery();
+        ID = (rsID.next()) ? rsID.getInt("res_code") + 1 : 1;
+        
+        createRes.setInt(1, ID);
+        createRes.setDate(2, new java.sql.Date(startDate.getTime()));
+        createRes.setDate(3, new java.sql.Date(endDate.getTime()));
+        createRes.setInt(4, room);
+        createRes.setString(5, getName());
+
+        //createRes.executeUpdate();
+
+        statement.close();
+        con.commit();
+        con.close();
+        
+        System.out.println("DEBUG " + ind);
+    }
 }

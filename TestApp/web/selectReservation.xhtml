@@ -9,10 +9,21 @@
     </h:head>
     <h:body>
         <h:form>
+            <h:selectOneMenu value="#{reservations.ind}">
+                <f:selectItems value="#{reservations.listIndex}"/>
+            </h:selectOneMenu>
             <h:dataTable id="res" border="10" value="#{reservations.reservations}" var="reservation">
-                <h:column>
-                    <input type="radio" name="reservations" value="integer" enabled="enabled" />
-                </h:column>
+<!--                <h:column>
+                    <h:selectOneRadio onclick="uncheckRadioButtons(this);" value = "{reservations.ind}">
+                        <f:selectItem itemValue = "{reservation.index}" itemLabel = "" />
+                    </h:selectOneRadio>
+                </h:column>-->
+                    <h:column>
+                        <f:facet name = "header">
+                            <h:outputText value = "Num"/>
+                        </f:facet>
+                        <p>#{reservation.index}</p>
+                    </h:column>
                     <h:column>
                         <f:facet name = "header">
                            <h:outputText value = "Room"/>
@@ -32,9 +43,9 @@
                     <p>#{reservation.bed_type}</p>
                 </h:column>
             </h:dataTable>
-            <h:commandButton value="Submit" action="result" />
+            <h:commandButton value="Submit" action="#{reservations.createReservation}" />
         </h:form>
-                        
+                      
     </h:body>
 </html>
 
