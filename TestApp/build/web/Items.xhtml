@@ -1,16 +1,20 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
         Add an item
         <h:form>
-            <p>Charge Code:
+<!--            <p>Charge Code:
                 <h:inputText value="#{item.chargeCode}" id="chargeCode" required="true"></h:inputText>
-            </p>
+            </p>-->
             
             <p>Description:
                 <h:inputText value="#{item.description}" id="description" required="true"></h:inputText>
@@ -19,8 +23,15 @@
             <p>Cost:
                 <h:inputText value="#{item.cost}" id="cost" required="true"></h:inputText>
             </p>
-            <h:commandButton value="Create Item" action="#{item.createItem}"></h:commandButton>
+
+            <h:commandButton value="Create Item" type="reset" action="#{item.createItem}">
+            </h:commandButton>
+            <h:outputScript rendered="#{item.itemCreated}">
+                alert("You can't delete it.");
+            </h:outputScript>
+
         </h:form>
+
     </h:body>
 </html>
 

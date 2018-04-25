@@ -77,4 +77,6 @@ public class AdditionalCharges implements Serializable {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+    
+    
 }
