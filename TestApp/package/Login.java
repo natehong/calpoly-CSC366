@@ -76,7 +76,7 @@ public class Login implements Serializable {
         // the exception will print an error message on the page definded by validator message
         String pass;
         Connection con = dbConnect.getConnection();
-
+        
         if (con == null) {
             throw new SQLException("Can't get database connection");
         }

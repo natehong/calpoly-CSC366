@@ -35,13 +35,7 @@
                              action="#{reservations.findReservation}">
             </h:commandButton>
         </h:form>
-        <h:panelGroup id="table-wrapper">
-            <h:dataTable value="#{reservations.reservations}" var="reservation">
-                <h:column>
-                    <p>Room: #{reservation.room} Ocean View: #{reservation.ocean_view} Bed Type: #{reservation.bed_type}</p>
-                </h:column>
-            </h:dataTable>
-        </h:panelGroup>
+
     </h:body>
 </html>
 

@@ -8,13 +8,33 @@
         <title>Select a Reservation</title>
     </h:head>
     <h:body>
-        <h:panelGroup id="table-wrapper">
-            <h:dataTable value="#{reservations.reservations}" var="reservation">
+        <h:form>
+            <h:dataTable id="res" border="10" value="#{reservations.reservations}" var="reservation">
                 <h:column>
-                    <p>Room: #{reservation.room} Ocean View: #{reservation.ocean_view} Bed Type: #{reservation.bed_type}</p>
+                    <input type="radio" name="reservations" value="integer" enabled="enabled" />
+                </h:column>
+                    <h:column>
+                        <f:facet name = "header">
+                           <h:outputText value = "Room"/>
+                        </f:facet>
+                        <p>#{reservation.room} </p>
+                    </h:column>
+                    <h:column>
+                        <f:facet name = "header">
+                           <h:outputText value = "Ocean View"/>
+                        </f:facet>
+                        <p>#{reservation.ocean_view}</p>
+                    </h:column>
+                <h:column>
+                    <f:facet name = "header">
+                        <h:outputText value = "Bed Type"/>
+                    </f:facet>
+                    <p>#{reservation.bed_type}</p>
                 </h:column>
             </h:dataTable>
-        </h:panelGroup>
+            <h:commandButton value="Submit" action="result" />
+        </h:form>
+                        
     </h:body>
 </html>
 
