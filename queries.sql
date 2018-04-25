@@ -45,7 +45,7 @@ ORDER BY check_in;
 -- WHERE customer = 'nh'
 -- ORDER BY check_in;
 
--- *NOTE* should run all 3 together to completely reservation data from database
+-- *NOTE* should run all 3 together to completely remove reservation data from database
 -- remove a certain reservation if check-in date has not passed
 DELETE FROM reservations
 WHERE res_code = REQUESTED_res_code

@@ -35,7 +35,8 @@ public class CreateCustomer implements Serializable {
     private String email, street, city;
     private int streetNum, zipcode;
 
-    private int creditCard, crc;
+    private long creditCard;
+    private int crc;
     private Date expDate;
     
     private DBConnect dbConnect = new DBConnect();
@@ -112,11 +113,11 @@ public class CreateCustomer implements Serializable {
         this.zipcode = zipcode;
     }
     
-    public int getCreditCard() {
+    public long getCreditCard() {
         return creditCard;
     }
 
-    public void setCreditCard(int creditCard) {
+    public void setCreditCard(long creditCard) {
         this.creditCard = creditCard;
     }
     
@@ -184,7 +185,7 @@ public class CreateCustomer implements Serializable {
         createAcc.setString(7, street);
         createAcc.setString(8, city);
         createAcc.setInt(9, zipcode);
-        createAcc.setInt(10, creditCard);
+        createAcc.setLong(10, creditCard);
         createAcc.setDate(11, new java.sql.Date(expDate.getTime()));
         createAcc.setInt(12, crc);
         

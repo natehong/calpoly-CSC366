@@ -167,3 +167,12 @@ VALUES
 (8, 3, '2018-07-05', 100),
 (9, 4, '2018-11-20', 100),
 (10, 4, '2018-11-21', 100);
+
+
+INSERT INTO additional_charges (charge_code, description, cost)
+VALUES
+()
+
+INSERT INTO additional_charges_invoices (invoice_code, reservation, charge_date, charge, quantity)
+VALUES
+()
