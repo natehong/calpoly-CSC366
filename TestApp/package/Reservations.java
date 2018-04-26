@@ -30,7 +30,6 @@ import javax.faces.validator.ValidatorException;
 @SessionScoped
 
 public class Reservations implements Serializable {
-    
     private int reservationID;
     private Date startDate;
     private Date endDate;

@@ -13,20 +13,20 @@
         Add an item
         <h:form>
 <!--            <p>Charge Code:
-                <h:inputText value="#{item.chargeCode}" id="chargeCode" required="true"></h:inputText>
+                <h:inputText value="#{items.chargeCode}" id="chargeCode" required="true"></h:inputText>
             </p>-->
             
             <p>Description:
-                <h:inputText value="#{item.description}" id="description" required="true"></h:inputText>
+                <h:inputText value="#{items.description}" id="description" required="true"></h:inputText>
             </p>
             
             <p>Cost:
-                <h:inputText value="#{item.cost}" id="cost" required="true"></h:inputText>
+                <h:inputText value="#{items.cost}" id="cost" required="true"></h:inputText>
             </p>
 
-            <h:commandButton value="Create Item" type="reset" action="#{item.createItem}">
+            <h:commandButton value="Create Item" type="reset" action="#{items.createItem}">
             </h:commandButton>
-            <h:outputScript rendered="#{item.itemCreated}">
+            <h:outputScript rendered="#{items.itemCreated}">
             </h:outputScript>
 
         </h:form>
