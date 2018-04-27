@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.TimeZone;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.inject.Named;
 import javax.faces.bean.ManagedBean;
@@ -35,6 +37,13 @@ public class Login implements Serializable {
     
     private UIInput loginUI;
 
+    @PostConstruct
+    public void init() {
+        System.out.println("Setting Time Zone to UTC-8:00");
+        TimeZone timeZone;
+        timeZone = TimeZone.getTimeZone("UTC-8:00");
+        TimeZone.setDefault(timeZone);
+    }
     public UIInput getLoginUI() {
         return loginUI;
     }

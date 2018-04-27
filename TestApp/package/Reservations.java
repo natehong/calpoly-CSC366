@@ -45,8 +45,65 @@ public class Reservations implements Serializable {
     
     private List<Reservation> reservations;
     private List<Integer> listIndex;
+    private List<UserReservations> userReservations;
 
     private DBConnect dbConnect = new DBConnect();
+    
+    public class UserReservations implements Serializable {
+        
+        private int resCode;
+        private Date checkIn, checkOut;
+        private String view, roomType;
+        
+        public UserReservations(int rc, Date ci, Date co, String v, String rt) {
+            resCode = rc;
+            checkIn = ci;
+            checkOut = co;
+            view = v;
+            roomType = rt;
+        }
+
+        public int getResCode() {
+            return resCode;
+        }
+
+        public void setResCode(int resCode) {
+            this.resCode = resCode;
+        }
+
+        public Date getCheckIn() {
+            return checkIn;
+        }
+
+        public void setCheckIn(Date checkIn) {
+            this.checkIn = checkIn;
+        }
+
+        public Date getCheckOut() {
+            return checkOut;
+        }
+
+        public void setCheckOut(Date checkOut) {
+            this.checkOut = checkOut;
+        }
+
+        public String getView() {
+            return view;
+        }
+
+        public void setView(String view) {
+            this.view = view;
+        }
+
+        public String getRoomType() {
+            return roomType;
+        }
+
+        public void setRoomType(String roomType) {
+            this.roomType = roomType;
+        }
+        
+    }
     
     public class Reservation implements Serializable {
         private int room, index;
@@ -104,6 +161,7 @@ public class Reservations implements Serializable {
     public int getReservationID() {
         return reservationID;
     }
+    
     public void setReservationID(int reservationID) {
         this.reservationID = reservationID;
     }
@@ -111,6 +169,7 @@ public class Reservations implements Serializable {
     public Date getStartDate() {
         return startDate;
     }
+    
     public void setStartDate(Date choice) {
         this.startDate = choice;
     }
@@ -138,6 +197,7 @@ public class Reservations implements Serializable {
     public String getRoomChoice() {
         return roomChoice;
     }
+    
     public String[] getRoomChoices() {
         return roomChoices;
     }
@@ -149,6 +209,7 @@ public class Reservations implements Serializable {
     public int getRoomNumber() {
         return roomNumber;
     }
+    
     public void setRoomNumber(int roomNumber) {
         this.roomNumber = roomNumber;
     }
@@ -173,6 +234,15 @@ public class Reservations implements Serializable {
 
     public void setListIndex(List<Integer> listIndex) {
         this.listIndex = listIndex;
+    }
+    
+    public List<UserReservations> getUserReservations() throws SQLException {
+        showAllReservations();
+        return userReservations;
+    }
+
+    public void setUserReservations(List<UserReservations> userReservations) {
+        this.userReservations = userReservations;
     }
     
     public String findReservation() throws SQLException {
@@ -228,7 +298,7 @@ public class Reservations implements Serializable {
     
     public void createReservation() throws SQLException {
         int ID;
-        int room = 0;
+        
         Connection con = dbConnect.getConnection();
 
         if (con == null) {
@@ -252,15 +322,103 @@ public class Reservations implements Serializable {
         createRes.setInt(1, ID);
         createRes.setDate(2, new java.sql.Date(startDate.getTime()));
         createRes.setDate(3, new java.sql.Date(endDate.getTime()));
-        createRes.setInt(4, room);
+        createRes.setInt(4, reservations.get(ind).getRoom());
         createRes.setString(5, getName());
 
-        //createRes.executeUpdate();
+        createRes.executeUpdate();
 
         statement.close();
         con.commit();
         con.close();
+    }
+    
+    public void showAllReservations() throws SQLException {
+        int room_code; 
+        String bed_type;
+        String view;
+        Date c_in, c_out;
         
-        System.out.println("DEBUG " + ind);
+        Connection con = dbConnect.getConnection();
+
+        if (con == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        
+        Statement statement = con.createStatement();
+        
+        con.setAutoCommit(false);
+        
+  
+        PreparedStatement showRes = con.prepareStatement(
+            "SELECT *\n" +
+            "FROM reservations\n" +
+            "WHERE customer = ?\n" +
+            "ORDER BY check_in;");
+        
+        showRes.setString(1, getName());
+
+    
+        ResultSet rs = showRes.executeQuery();
+        userReservations = new ArrayList<>();
+        while(rs.next())
+        {
+            c_in = rs.getDate("check_in");
+            c_out = rs.getDate("check_out");
+            
+            if((room_code = rs.getInt("res_code")) % 2 == 0) // even then single king
+                bed_type = "Single King";
+            else
+                bed_type = "Double Queen";
+            if((room_code = rs.getInt("res_code")) % 100 > 6)
+                view = "Pool";
+            else
+                view = "Ocean";
+            
+            userReservations.add(new UserReservations(
+                    room_code, c_in, c_out, view, bed_type));
+        }
+        statement.close();
+        con.commit();
+        con.close();
+    }
+    
+    public void cancelReservation() throws SQLException {
+        
+        Connection con = dbConnect.getConnection();
+
+        if (con == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        
+        Statement statement = con.createStatement();
+        
+        con.setAutoCommit(false);
+        
+        PreparedStatement deleteRes = con.prepareStatement(
+            "DELETE FROM reservations\n" +
+            "WHERE res_code = ?\n" +
+            "AND current_date > check_in;");
+        
+        PreparedStatement deleteCharges = con.prepareStatement(
+            "DELETE FROM additional_charges_invoices\n" +
+            "WHERE reservation = ?\n" +
+            "AND current_date > charge_date;");
+        
+//        PreparedStatement deleteHistory = con.prepareStatement(
+//            "DELETE FROM room_rate_history\n" +
+//            "WHERE reservation = ?\n" +
+//            "AND current_date > charge_date;");
+        
+        deleteRes.setInt(1, reservationID);
+        deleteCharges.setInt(1, reservationID);
+        //deleteHistory.setInt(1, reservationID);
+
+        deleteRes.executeUpdate();
+        deleteCharges.executeUpdate();
+        //deleteHistory.executeUpdate();
+
+        statement.close();
+        con.commit();
+        con.close();
     }
 }

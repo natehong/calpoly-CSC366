@@ -8,31 +8,36 @@
     </h:head>
     <h:body>
         <p>Here are your current reservations </p>
-        <h:dataTable value = "Current Resrvations" var = "reservations"
+        <h:dataTable value = "#{reservations.userReservations}" var = "reservation"
             styleClass = "reservationsTable"
             headerClass = "reservationsTableHeader"
             rowClasses ="reservationsTableOddRow, reservationsTableEvenRow">
 
             <h:column>    				
                 <f:facet name = "header">Reservation No.</f:facet>
+                <p>#{reservation.resCode}</p>
             </h:column>   
             <h:column>    				
                 <f:facet name = "header">Start Date</f:facet>
+                <p>#{reservation.checkIn}</p>
             </h:column>
             <h:column>
                 <f:facet name = "header">End Date</f:facet>
+                <p>#{reservation.checkOut}  </p>
             </h:column>
             <h:column>
                 <f:facet name = "header">View Type</f:facet>
+                <p>  #{reservation.view}</p>
             </h:column>
             <h:column>
                 <f:facet name = "header">Room Type</f:facet>
+                <p>#{reservation.roomType}</p>
             </h:column>
         </h:dataTable>
         <h:form>
             <p>Reservation No:
-                <h:inputText value="" id="cancelReqId" required="true"></h:inputText>
-                <h:commandButton value="Cancel Reservation" action="cancelReservation"></h:commandButton>
+                <h:inputText value="#{reservations.reservationID}" id="cancelReqId" required="true" converterMessage="Please enter digits only."></h:inputText>
+                <h:commandButton value="Cancel Reservation" action="#{reservations.cancelReservation}"></h:commandButton>
             </p>
         </h:form>
     </h:body>
