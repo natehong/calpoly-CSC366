@@ -8,37 +8,45 @@
     </h:head>
     <h:body>
         <p>Here are your current reservations </p>
-        <h:dataTable value = "#{reservations.userReservations}" var = "reservation"
-            styleClass = "reservationsTable"
-            headerClass = "reservationsTableHeader"
-            rowClasses ="reservationsTableOddRow, reservationsTableEvenRow">
-
-            <h:column>    				
-                <f:facet name = "header">Reservation No.</f:facet>
-                <p>#{reservation.resCode}</p>
-            </h:column>   
-            <h:column>    				
-                <f:facet name = "header">Start Date</f:facet>
-                <p>#{reservation.checkIn}</p>
-            </h:column>
-            <h:column>
-                <f:facet name = "header">End Date</f:facet>
-                <p>#{reservation.checkOut}  </p>
-            </h:column>
-            <h:column>
-                <f:facet name = "header">View Type</f:facet>
-                <p>  #{reservation.view}</p>
-            </h:column>
-            <h:column>
-                <f:facet name = "header">Room Type</f:facet>
-                <p>#{reservation.roomType}</p>
-            </h:column>
-        </h:dataTable>
         <h:form>
-            <p>Reservation No:
-                <h:inputText value="#{reservations.reservationID}" id="cancelReqId" required="true" converterMessage="Please enter digits only."></h:inputText>
-                <h:commandButton value="Cancel Reservation" action="#{reservations.cancelReservation}"></h:commandButton>
-            </p>
+            <h:dataTable id="res" border="10" value="#{reservations.userReservations}" var="reservation">
+<!--                <h:column>
+                    <h:selectOneRadio onclick="uncheckRadioButtons(this);" value = "{reservations.ind}">
+                        <f:selectItem itemValue = "{reservation.index}" itemLabel = "" />
+                    </h:selectOneRadio>
+                </h:column>-->
+                    <h:column>
+                        <f:facet name = "header">
+                            <h:outputText value = "Reservation Code"/>
+                        </f:facet>
+                        <p>#{reservation.resCode}</p>
+                    </h:column>
+                    <h:column>
+                        <f:facet name = "header">
+                           <h:outputText value = "Check In Date"/>
+                        </f:facet>
+                        <p>#{reservation.checkIn} </p>
+                    </h:column>
+                    <h:column>
+                        <f:facet name = "header">
+                           <h:outputText value = "Check Out Date"/>
+                        </f:facet>
+                        <p>#{reservation.checkOut}</p>
+                    </h:column>
+                <h:column>
+                    <f:facet name = "header">
+                        <h:outputText value = "View"/>
+                    </f:facet>
+                    <p>#{reservation.view}</p>
+                </h:column>
+                <h:column>
+                    <f:facet name = "header">
+                        <h:outputText value = "Room Type"/>
+                    </f:facet>
+                    <p>#{reservation.roomType}</p>
+                </h:column>
+            </h:dataTable>
+            <!--<h:commandButton value="Submit" action=reservations.createReservation />-->
         </h:form>
     </h:body>
 </html>

@@ -237,7 +237,7 @@ public class Reservations implements Serializable {
     }
     
     public List<UserReservations> getUserReservations() throws SQLException {
-        showAllReservations();
+        showCustomerReservations();
         return userReservations;
     }
 
@@ -332,7 +332,7 @@ public class Reservations implements Serializable {
         con.close();
     }
     
-    public void showAllReservations() throws SQLException {
+    public String showCustomerReservations() throws SQLException {
         int room_code; 
         String bed_type;
         String view;
@@ -380,6 +380,7 @@ public class Reservations implements Serializable {
         statement.close();
         con.commit();
         con.close();
+        return "checkRsvr";
     }
     
     public void cancelReservation() throws SQLException {
