@@ -10,7 +10,7 @@
         <h:form>
             <p>Current total for stay: #{reservations.total}</p>
             <p>Day left until stay:</p>
-            <h:commandButton value="check/canecl Reservation" action="checkRsvr"></h:commandButton>
+            <h:commandButton value="check/canecl Reservation" action="#{reservations.showCustomerReservations}"></h:commandButton>
             <h:commandButton value="create Reservation" action="createRsvr"></h:commandButton>
             <h:commandButton value="Add additional charge" action="#{items.findItems}"></h:commandButton>
         </h:form>

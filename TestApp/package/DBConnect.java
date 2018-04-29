@@ -1,4 +1,3 @@
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -19,7 +18,7 @@ public class DBConnect {
         try {
             connection = DriverManager.getConnection(
                     "jdbc:postgresql://localhost:5432/postgres", "postgres",
-                    "postgres"); //not actual password
+                    "Pm*090996"); //not actual password
 
         } catch (SQLException e) {
             System.out.println("Connection Failed! Check output console");
