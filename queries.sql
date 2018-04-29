@@ -58,10 +58,22 @@ AND current_date >= res_date;
 -- calculate total charge for additional charges
 SELECT SUM(cost) AS additional_charges_total
 FROM additional_charges_invoices
-INNER JOIN additional_charges
-ON charge = charge_code
+INNER JOIN additional_charges ON charge = charge_code
 WHERE reservation = REQUESTED_res_code
 AND current_date >= charge_date;
+
+-- list additional charges given a reservation
+SELECT *
+FROM additional_charges_invoices
+INNER JOIN additional_charges ON charge = charge_id
+WHERE reservation = REQUESTED_res_code
+AND current_date >= charge_date;
+
+-- list room charges
+SELECT *
+FROM room_rate_history
+WHERE reservation = REQUESTED_res_code
+AND current_date >= res_date;
 
 -- combined total charge
 SELECT SUM(total)
