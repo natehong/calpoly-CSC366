@@ -8,30 +8,28 @@
     </h:head>
     <h:body>
         <h:form>
-            Additional Charge
-            
-            <p>Invoice Id:
-                <h:inputText value="#{additionalCharges.invoiceCode}" id="invoiceCode" required="true"></h:inputText>
-            </p>
-            
+            Additional Charge            
             <p>Reservation Id:
                 <h:inputText value="#{additionalCharges.reservationCode}" id="reservationCode" required="true"></h:inputText>
             </p>
             
-            <p>Charge Date:
-                <h:inputText value="#{additionalCharges.chargeDate}" id="chargeDate" required="true">
+<!--            <p>Charge Date:
+                <h:inputText value="{additionalCharges.chargeDate}" id="chargeDate" required="true">
                     <f:convertDateTime pattern="yyyy-MM-dd"/>
                 </h:inputText>
-            </p>
+            </p>-->
             
-            <p>Charge Id:
-                <h:inputText value="#{additionalCharges.chargeCode}" id="chargeCode" required="true"></h:inputText>
-            </p>
-            
+<!--            <p>Charge Id:
+                <h:inputText value="{additionalCharges.chargeCode}" id="chargeCode" required="true"></h:inputText>
+            </p>-->
+            <h:selectOneMenu value="#{additionalCharges.chargeCode}">
+                <f:selectItems value="#{items.items}" var="item" itemLabel="#{item.desc}" itemValue="#{item.code}"/>
+            </h:selectOneMenu>
+
             <p>Quantity:
                 <h:inputText value="#{additionalCharges.quantity}" id="quantity" required="true"></h:inputText>
             </p>
-<!--         need implementation-->
+        <h:commandButton value="Submit" action="#{additionalCharges.createCharge}" />
         </h:form>
     </h:body>
 </html>

@@ -80,6 +80,8 @@ AND current_date > charge_date;
 SELECT description, cost
 FROM additional_charges;
 
+-- adding an item to an invoice
+INSERT INTO additional_charges_invoices VALUES ();
 -- calculate final bill at check-out...given reservation ID
 
 -- calculate total for just using the room

@@ -46,7 +46,8 @@
                     <p>#{reservation.roomType}</p>
                 </h:column>
             </h:dataTable>
-            <!--<h:commandButton value="Submit" action=reservations.createReservation />-->
+            <h:inputText value="#{reservations.reservationID}" id="ResID" required="true"></h:inputText>
+            <h:commandButton value="Submit" action="#{reservations.cancelReservation}" />
         </h:form>
     </h:body>
 </html>

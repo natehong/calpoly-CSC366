@@ -21,7 +21,7 @@ import javax.faces.bean.SessionScoped;
  * @author Patrick
  */
 
-@Named(value = "item")
+@Named(value = "items")
 @ManagedBean
 @SessionScoped
 
@@ -36,52 +36,7 @@ public class Items implements Serializable {
     private List<Item> items;
     private List<Integer> listIndex;
     
-    public class Item implements Serializable {
-        private int code;
-        private String desc;
-        private int price;
-        private int index;
 
-        
-        public Item(int code, String desc, int price, int index) {
-                this.code = code;
-                this.desc = desc;
-                this.price = price;
-                this.index = index;
-            }
-        
-        public int getCode(){
-            return code;
-        }
-
-        public void setCode(int code){
-            this.code = code;
-        }
-        
-        public String getDesc(){
-            return desc;
-        }
-
-        public void setDesc (String desc){
-            this.desc = desc;
-        }
-        
-        public int getPrice(){
-            return price;
-        }
-
-        public void setPrice(int price){
-            this.price = price;
-        }
-        
-        public int getIndex() {
-            return index;
-        }
-
-        public void setIndex(int index) {
-            this.index = index;
-        }
-    }
     
     public int getChargeCode(){
         return chargeCode;
@@ -123,7 +78,8 @@ public class Items implements Serializable {
         this.ind = ind;
     }
     
-    public List<Item> getItems() {
+    public List<Item> getItems() throws SQLException {
+        findItems();
         return items;
     }
     
