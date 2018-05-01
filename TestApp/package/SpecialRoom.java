@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.util.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.inject.Named;
@@ -25,25 +26,17 @@ import javax.faces.bean.SessionScoped;
 
 public class SpecialRoom implements Serializable {
     
-    private String specialRateID, roomID;
+    private int roomID;
     private double rate;
-    private String bookDate;
+    private Date bookDate;
     
     private DBConnect dbConnect = new DBConnect();
-
-    public String getSpecialRateID() {
-        return specialRateID;
-    }
-
-    public void setSpecialRateID(String roomID) {
-        this.specialRateID = specialRateID;
-    }
     
-    public String getRoomID() {
+    public int getRoomID() {
         return roomID;
     }
 
-    public void setRoomID(String roomID) {
+    public void setRoomID(int roomID) {
         this.roomID = roomID;
     }
     
@@ -51,20 +44,20 @@ public class SpecialRoom implements Serializable {
         return rate;
     }
     
-    public void setRate(int rate){
+    public void setRate(double rate){
         this.rate = rate;
     }
  
-    public String getBookDate() {
+    public Date getBookDate() {
         return bookDate;
     }
 
-    public void setBookDate(String bookDate) {
+    public void setBookDate(Date bookDate) {
         this.bookDate = bookDate;
     }
     
     public String createSpecialRate() throws SQLException {
-        
+        int ID;
         Connection con = dbConnect.getConnection();
 
         if (con == null) {
@@ -74,13 +67,19 @@ public class SpecialRoom implements Serializable {
         
         Statement statement = con.createStatement();
         
-        PreparedStatement createRate = con.prepareStatement(
-            "INSERT INTO customers VALUES(?,?,?)");
+        PreparedStatement getID = con.prepareStatement(
+            "SELECT special_rate_code FROM special_room_rates ORDER BY special_rate_code DESC");
+            
+        ResultSet rsID = getID.executeQuery();
+        ID = (rsID.next()) ? rsID.getInt("special_rate_code") + 1 : 1;
         
-        createRate.setString(1, specialRateID);
-        createRate.setString(2, roomID);
-        createRate.setDouble(3, rate);
-        createRate.setString(4, bookDate);
+        PreparedStatement createRate = con.prepareStatement(
+            "INSERT INTO special_room_rates VALUES(?,?,?,?)");
+        
+        createRate.setInt(1, ID);
+        createRate.setInt(2, roomID);
+        createRate.setDate(3, new java.sql.Date(bookDate.getTime()));
+        createRate.setDouble(4, rate);
 
         createRate.executeUpdate();
         statement.close();

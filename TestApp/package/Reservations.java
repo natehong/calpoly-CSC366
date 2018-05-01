@@ -23,7 +23,7 @@ import javax.faces.validator.ValidatorException;
 
 /**
  *
- * @author stanchev
+ * @author Derek
  */
 @Named(value = "reservations")
 @ManagedBean
@@ -480,16 +480,16 @@ public class Reservations implements Serializable {
         PreparedStatement deleteHistory = con.prepareStatement(
             "DELETE FROM room_rate_history\n" +
             "WHERE reservation = ?\n" +
-            "AND current_date > charge_date;");
+            "AND current_date > res_date;");
         
         deleteRes.setInt(1, reservationID);
         deleteCharges.setInt(1, reservationID);
         deleteHistory.setInt(1, reservationID);
 
-        deleteRes.executeUpdate();
         deleteCharges.executeUpdate();
         deleteHistory.executeUpdate();
-
+        deleteRes.executeUpdate();
+        
         statement.close();
         con.commit();
         con.close();

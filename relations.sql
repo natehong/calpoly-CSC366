@@ -48,7 +48,7 @@ CREATE TABLE additional_charges (
 -- will be the first place to look for room price
 CREATE TABLE special_room_rates (
    special_rate_code INT NOT NULL,
-   room INT CHECK (room > 101) NOT NULL,
+   room INT CHECK (room >= 101) NOT NULL,
    book_date DATE NOT NULL,
    rate NUMERIC(5,2) CHECK (rate > 0) NOT NULL,
    PRIMARY KEY (special_rate_code),
