@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/web/additionalChargeMenu.xhtml</file>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/package/Item.java</file>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/web/createAdditionalCharge.xhtml</file>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/package/AdditionalCharges.java</file>
+            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/package/Reservations.java</file>
+            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/web/currentReservation.xhtml</file>
+            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/web/selectReservation.xhtml</file>
+            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/web/viewAvailableRooms.xhtml</file>
         </group>
     </open-files>
 </project-private>

@@ -36,13 +36,13 @@
                         </f:facet>
                         <p>#{reservation.ocean_view}</p>
                     </h:column>
-                <h:column>
-                    <f:facet name = "header">
-                        <h:outputText value = "Bed Type"/>
-                    </f:facet>
-                    <p>#{reservation.bed_type}</p>
-                </h:column>
-            </h:dataTable>
+                    <h:column>
+                        <f:facet name = "header">
+                            <h:outputText value = "Bed Type"/>
+                        </f:facet>
+                        <p>#{reservation.bed_type}</p>
+                    </h:column>
+                </h:dataTable>
             <h:commandButton value="Submit" action="#{reservations.createReservation}" />
         </h:form>
                       

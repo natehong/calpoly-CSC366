@@ -43,11 +43,13 @@ public class Reservations implements Serializable {
     private String[] viewChoices = {"Pool", "Ocean"};
     private String[] roomChoices = {"double queen", "single king"};
     
+    private List<Reservation> allReservations;
     private List<Reservation> reservations;
     private List<Integer> listIndex;
     private List<UserReservations> userReservations;
 
     private DBConnect dbConnect = new DBConnect();
+    
     
     public class UserReservations implements Serializable {
         
@@ -106,15 +108,45 @@ public class Reservations implements Serializable {
     }
     
     public class Reservation implements Serializable {
+        private int floor;
+        private double price, sp;
         private int room, index;
         private boolean ocean_view;
         private String bed_type;
         
-        public Reservation(int room, boolean ocean_view, String bed_type, int index) {
+        public Reservation(int floor, double price, double sp,
+                int room, boolean ocean_view, 
+                String bed_type, int index) {
+            this.floor = floor;
+            this.price = price;
             this.room = room;
             this.ocean_view = ocean_view;
             this.bed_type = bed_type;
             this.index = index;
+        }
+        
+        public double getSp() {
+            return sp;
+        }
+
+        public void setSp(double sp) {
+            this.sp = sp;
+        }
+        
+        public int getFloor() {
+            return floor;
+        }
+
+        public void setFloor(int floor) {
+            this.floor = floor;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+        public void setPrice(double price) {
+            this.price = price;
         }
         
         public int getRoom() {
@@ -245,6 +277,15 @@ public class Reservations implements Serializable {
         this.userReservations = userReservations;
     }
     
+    public List<Reservation> getAllReservations() throws SQLException {
+        findAllReservations();
+        return allReservations;
+    }
+
+    public void setAllReservations(List<Reservation> allReservations) {
+        this.allReservations = allReservations;
+    }
+    
     public String findReservation() throws SQLException {
         int index = 0;
         boolean view = false;
@@ -287,7 +328,7 @@ public class Reservations implements Serializable {
         listIndex = new ArrayList<>();
         while(rs.next())
         {
-            reservations.add(new Reservation(rs.getInt("room_code"), rs.getBoolean("ocean_view"), rs.getString("bed_type"), index));
+            reservations.add(new Reservation(0, 0, 0, rs.getInt("room_code"), rs.getBoolean("ocean_view"), rs.getString("bed_type"), index));
             listIndex.add(index);
             index++;
         }
@@ -383,6 +424,37 @@ public class Reservations implements Serializable {
         return "checkRsvr";
     }
     
+    public void findAllReservations() throws SQLException {
+        Connection con = dbConnect.getConnection();
+
+        if (con == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        
+        Statement statement = con.createStatement();
+        
+        con.setAutoCommit(false);
+        
+        PreparedStatement findRes = con.prepareStatement(
+            "SELECT (room_code / 100) AS floor, (room_code - ((room_code/100) * 100)) AS room_number, ocean_view, bed_type, base_price, rate AS special_rate\n" +
+            "FROM rooms\n" +
+            "LEFT JOIN special_room_rates ON (room = room_code) AND (current_date = book_date)\n" +
+            "WHERE room_code NOT IN\n" +
+            "(SELECT room\n" +
+            "FROM reservations\n" +
+            "WHERE current_date BETWEEN check_in AND check_out)\n" +
+            "ORDER BY room_code;");
+        
+        ResultSet rs = findRes.executeQuery();
+        
+        allReservations = new ArrayList<>();
+        while(rs.next()) {
+            allReservations.add(new Reservation(rs.getInt("floor"), rs.getDouble("base_price"),
+                    rs.getDouble("special_rate"), rs.getInt("room_number"), rs.getBoolean("ocean_view"), 
+                    rs.getString("bed_type"), 0));
+        }
+    }
+    
     public void cancelReservation() throws SQLException {
         
         Connection con = dbConnect.getConnection();
@@ -405,18 +477,18 @@ public class Reservations implements Serializable {
             "WHERE reservation = ?\n" +
             "AND current_date > charge_date;");
         
-//        PreparedStatement deleteHistory = con.prepareStatement(
-//            "DELETE FROM room_rate_history\n" +
-//            "WHERE reservation = ?\n" +
-//            "AND current_date > charge_date;");
+        PreparedStatement deleteHistory = con.prepareStatement(
+            "DELETE FROM room_rate_history\n" +
+            "WHERE reservation = ?\n" +
+            "AND current_date > charge_date;");
         
         deleteRes.setInt(1, reservationID);
         deleteCharges.setInt(1, reservationID);
-        //deleteHistory.setInt(1, reservationID);
+        deleteHistory.setInt(1, reservationID);
 
         deleteRes.executeUpdate();
         deleteCharges.executeUpdate();
-        //deleteHistory.executeUpdate();
+        deleteHistory.executeUpdate();
 
         statement.close();
         con.commit();
