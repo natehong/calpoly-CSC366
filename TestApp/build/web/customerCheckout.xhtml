@@ -12,15 +12,15 @@
             <p>Reservation Id:
                 <h:inputText value="#{reservations.reservationID}" id="reservationID" required="true"></h:inputText>
             </p>
-            <p>Room:
-                <h:inputText value="#{reservations.startDate}" id="" required="true"></h:inputText>
+            <p>Room Number:
+                <h:inputText value="#{reservations.roomNumber}" id="startDate" required="true"></h:inputText>
             </p>
             <p>Checkout Date:
                 <h:inputText value="#{reservations.endDate}" id="endDate" required="true">
                     <f:convertDateTime pattern="yyyy-MM-dd"/>
                 </h:inputText>
             </p>
-            <h:commandButton value="Checkout" action="#{reservations.checkout}"></h:commandButton>
+            <h:commandButton value="View Invoice" action="invoice"></h:commandButton>
         </h:form>
     </h:body>
 </html>

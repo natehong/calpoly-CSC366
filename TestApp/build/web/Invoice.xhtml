@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Invoice Page</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:dataTable id="invoice" border="4" value="invoiceArray" var="invoice"  style="float:left">
+<!--                <h:column>
+                    <h:selectOneRadio onclick="uncheckRadioButtons(this);" value = "{reservations.ind}">
+                        <f:selectItem itemValue = "{reservation.index}" itemLabel = "" />
+                    </h:selectOneRadio>
+                </h:column>-->
+                    <h:column>
+                        <f:facet name = "header">
+                           <h:outputText value = "Charge Name"/>
+                        </f:facet>
+                        <p>class.Name <!--#{item.code}--></p>
+                    </h:column>
+                    <h:column>
+                        <f:facet name = "header">
+                           <h:outputText value = "Price"/>
+                        </f:facet>
+                        <p>class.desc <!--#{item.desc}--></p>
+                    </h:column>
+                <h:column>
+                    <f:facet name = "header">
+                        <h:outputText value = "Quantity"/>
+                    </f:facet>
+                    <p>class.quantity <!--$#{item.price}--></p>
+                </h:column>
+            </h:dataTable>
+            
+            <h:commandButton value="CheckOut" action="#{reservations.checkOut}" />
+        </h:form>
+    </h:body>
+</html>
+

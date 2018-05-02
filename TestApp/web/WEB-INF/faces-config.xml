@@ -45,7 +45,7 @@
         <from-view-id>/EmployeeHomePage.xhtml</from-view-id>
          <navigation-case>
             <from-outcome>checkout</from-outcome>
-            <to-view-id>checkoutCustomer.xhtml</to-view-id>
+            <to-view-id>customerCheckout.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -61,6 +61,15 @@
         <navigation-case>
             <from-outcome>createItem</from-outcome>
             <to-view-id>Items.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/customerCheckout.xhtml</from-view-id>
+         <navigation-case>
+            <from-outcome>invoice</from-outcome>
+            <to-view-id>Invoice.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -108,7 +117,7 @@
         </navigation-case>
     </navigation-rule>
     
-        <navigation-rule>
+    <navigation-rule>
         <from-view-id>/createReservation.xhtml</from-view-id>
          <navigation-case>
             <from-outcome>selectRes</from-outcome>
@@ -116,4 +125,13 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/selectReservation.xhtml</from-view-id>
+         <navigation-case>
+            <from-outcome>confirmReservation</from-outcome>
+            <to-view-id>confirmReservation.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>    
 </faces-config>
