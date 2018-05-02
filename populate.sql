@@ -176,3 +176,11 @@ VALUES
 INSERT INTO additional_charges_invoices (invoice_code, reservation, charge_date, charge, quantity)
 VALUES
 ()
+
+INSERT INTO room_rate_history (rate_id, reservation, res_date, rate)
+VALUES
+()
+
+INSERT INTO special_room_rates (special_rate_code, room, book_date, rate)
+VALUES
+()

@@ -105,3 +105,25 @@ WHERE room_code NOT IN
    FROM reservations
    WHERE current_date BETWEEN check_in AND check_out)
 ORDER BY room_code;
+
+-- calculate total room charge before reservation is made given date
+--    will be called in a loop at the java level to get total cost
+SELECT room_code, ocean_view, bed_type, base_price, rate
+FROM rooms
+LEFT JOIN special_room_rates ON (room = room_code) AND (REQUESTED_date = book_date)
+WHERE room_code = REQUESTED_room;
+
+-- given (check in, check out, view, bed type) list available rooms, price, and special price if there is one
+SELECT *
+FROM rooms
+INNER JOIN special_room_rates ON room_code = room
+WHERE ocean_view = REQUESTED_view AND
+bed_type = REQUESTED_bed_type AND
+room_code NOT IN
+   (SELECT DISTINCT room AS reserved_rooms
+   FROM reservations
+   WHERE ocean_view = REQUESTED_view
+   AND bed_type = REQUESTED_bed_type
+   AND ((check_in BETWEEN REQUESTED_check_in AND REQUESTED_check_out)
+   OR (check_out BETWEEN REQUESTED_check_in AND REQUESTED_check_out)))
+ORDER BY room_code;
