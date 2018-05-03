@@ -25,16 +25,35 @@ import javax.inject.Named;
 public class Item implements Serializable {
     private int code;
     private String desc;
-    private int price;
+    private double price;
     private int index;
+    private int quantity;
+    private double total_cost;
 
     public Item(){}
     
-    public Item(int code, String desc, int price, int index) {
+    public Item(int code, String desc, double price, int quantity, int index) {
         this.code = code;
         this.desc = desc;
         this.price = price;
         this.index = index;
+        this.quantity = quantity;
+    }
+
+    public double getTotal_cost() {
+        return quantity * price;
+    }
+
+    public void setTotal_cost(double total_cost) {
+        this.total_cost = total_cost;
+    }
+    
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public int getCode(){
@@ -53,11 +72,11 @@ public class Item implements Serializable {
         this.desc = desc;
     }
 
-    public int getPrice(){
+    public double getPrice(){
         return price;
     }
 
-    public void setPrice(int price){
+    public void setPrice(double price){
         this.price = price;
     }
 

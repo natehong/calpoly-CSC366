@@ -134,4 +134,13 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>    
+    
+    <navigation-rule>
+        <from-view-id>/confirmReservation.xhtml</from-view-id>
+         <navigation-case>
+            <from-outcome>confirm</from-outcome>
+            <to-view-id>UserHomepage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>    
 </faces-config>

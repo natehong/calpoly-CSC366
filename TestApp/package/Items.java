@@ -12,9 +12,11 @@ import java.util.List;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.el.ELContext;
 import javax.inject.Named;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -31,12 +33,24 @@ public class Items implements Serializable {
     private int cost;
     private int ind;
     private boolean itemCreated = false;
+    private int reservationID;
+
+    
     private DBConnect dbConnect = new DBConnect();
     
     private List<Item> items;
-    private List<Integer> listIndex;
-    
+    private List<Item> invoice;
 
+
+    private List<Integer> listIndex;
+
+    public int getReservationID() {
+        return reservationID;
+    }
+
+    public void setReservationID(int reservationID) {
+        this.reservationID = reservationID;
+    }
     
     public int getChargeCode(){
         return chargeCode;
@@ -90,8 +104,53 @@ public class Items implements Serializable {
     public void setListIndex(List<Integer> listIndex) {
         this.listIndex = listIndex;
     }
+    
+    public List<Item> getInvoice() throws SQLException {
+        billItem();
+        return invoice;
+    }
 
-    public void billItem(){}
+    public void setInvoice(List<Item> invoice) {
+        this.invoice = invoice;
+    }
+    
+    public int getResID() {
+        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+        Reservations res = (Reservations) elContext.getELResolver().getValue(elContext, null, "reservations");
+        return res.getReservationID();
+    }
+    
+    public void billItem() throws SQLException {
+        int index = 0;
+        Connection con = dbConnect.getConnection();
+
+        if (con == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        
+        con.setAutoCommit(false);
+        PreparedStatement findRes = con.prepareStatement(
+            "SELECT *\n" +
+            "FROM additional_charges_invoices\n" +
+            "INNER JOIN additional_charges ON charge = charge_code\n" +
+            "WHERE reservation = ?\n"
+//            "AND current_date >= charge_date;"
+        );    
+        findRes.setInt(1, getResID());
+
+        ResultSet rs = findRes.executeQuery();
+
+        invoice = new ArrayList<>();
+        while(rs.next())
+        {
+            int quantity = rs.getInt("quantity");
+            double total_cost = rs.getDouble("cost");
+
+            invoice.add(new Item(rs.getInt("charge_code"), rs.getString("description"), total_cost, quantity, index));
+            index++;
+        }
+
+    }
     
     public String findItems() throws SQLException {
         int index = 0;
@@ -114,7 +173,7 @@ public class Items implements Serializable {
         listIndex = new ArrayList<>();
         while(rs.next())
         {
-            items.add(new Item(rs.getInt("charge_code"), rs.getString("description"), rs.getInt("cost"), index));
+            items.add(new Item(rs.getInt("charge_code"), rs.getString("description"), rs.getDouble("cost"), 0, index));
             listIndex.add(index);
             index++;
         }

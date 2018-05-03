@@ -65,15 +65,15 @@ AND current_date >= charge_date;
 -- list additional charges given a reservation
 SELECT *
 FROM additional_charges_invoices
-INNER JOIN additional_charges ON charge = charge_id
+INNER JOIN additional_charges ON charge = charge_code
 WHERE reservation = REQUESTED_res_code
-AND current_date >= charge_date;
+-- AND current_date >= charge_date;
 
 -- list room charges
 SELECT *
 FROM room_rate_history
 WHERE reservation = REQUESTED_res_code
-AND current_date >= res_date;
+-- AND current_date >= res_date;
 
 -- combined total charge
 SELECT SUM(total)
@@ -82,8 +82,8 @@ FROM
    FROM
       (SELECT SUM(rate) AS total
       FROM room_rate_history
-      WHERE reservation = REQUESTED_res_code
-      AND current_date >= res_date) AS room_total
+      WHERE reservation = REQUESTED_res_code )AS room_total
+    --   AND current_date >= res_date) AS room_total
    UNION
    SELECT *
    FROM
@@ -91,8 +91,9 @@ FROM
       FROM additional_charges_invoices
       INNER JOIN additional_charges
       ON charge = charge_code
-      WHERE reservation = REQUESTED_res_code
-      AND current_date >= charge_date) AS additional_total
+      WHERE reservation = REQUESTED_res_code )AS additional_total
+    --   AND current_date >= charge_date) AS additional_total
+
    ) AS combined_total;
 
 -- list all available rooms given today's date

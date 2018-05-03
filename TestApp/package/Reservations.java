@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -45,12 +47,38 @@ public class Reservations implements Serializable {
     
     private List<Reservation> allReservations;
     private List<Reservation> reservations;
+    private List<CheckoutRes> checkoutRes;
     private List<Integer> listIndex;
     private List<UserReservations> userReservations;
 
     private DBConnect dbConnect = new DBConnect();
     
-    
+    public class CheckoutRes implements Serializable {
+        private Date res_date;
+        private double price;
+        
+        public CheckoutRes(Date res_date, double price) {
+            this.res_date = res_date;
+            this.price = price;
+        }
+
+        public Date getRes_date() {
+            return res_date;
+        }
+
+        public void setRes_date(Date res_date) {
+            this.res_date = res_date;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+        public void setPrice(double price) {
+            this.price = price;
+        }
+        
+    }
     public class UserReservations implements Serializable {
         
         private int resCode;
@@ -180,6 +208,16 @@ public class Reservations implements Serializable {
         public void setIndex(int index) {
             this.index = index;
         }
+    }
+    
+    
+    public List<CheckoutRes> getCheckoutRes() throws SQLException {
+        findCheckoutRes();
+        return checkoutRes;
+    }
+
+    public void setCheckoutRes(List<CheckoutRes> checkoutRes) {
+        this.checkoutRes = checkoutRes;
     }
     
     public int getInd() {
@@ -335,9 +373,30 @@ public class Reservations implements Serializable {
         return "selectRes";
     }
     
-    public void checkout(){}    
+    public void checkout() throws SQLException {
+            Connection con = dbConnect.getConnection();
+
+        if (con == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        
+        Statement statement = con.createStatement();
+        
+        con.setAutoCommit(false);
+        
+
+        
+        PreparedStatement createRes = con.prepareStatement(
+             "INSERT INTO reservations VALUES(?,?,?,?,?)");
     
-    public void createReservation() throws SQLException {
+        createRes.executeUpdate();
+
+        statement.close();
+        con.commit();
+        con.close();
+    }   
+    
+    public String createReservation() throws SQLException {
         int ID;
         
         Connection con = dbConnect.getConnection();
@@ -354,9 +413,11 @@ public class Reservations implements Serializable {
             "SELECT res_code FROM reservations ORDER BY res_code DESC");
         
         PreparedStatement createRes = con.prepareStatement(
-             "INSERT INTO reservations VALUES(?,?,?,?,?)");
-    
+            "INSERT INTO reservations VALUES(?,?,?,?,?)");
         
+        PreparedStatement resHist = con.prepareStatement(
+            "INSERT INTO room_rate_history VALUES(?,?,?,?)");
+       
         ResultSet rsID = getID.executeQuery();
         ID = (rsID.next()) ? rsID.getInt("res_code") + 1 : 1;
         
@@ -367,10 +428,49 @@ public class Reservations implements Serializable {
         createRes.setString(5, getName());
 
         createRes.executeUpdate();
+        
+        PreparedStatement getHID = con.prepareStatement(
+            "SELECT rate_id FROM room_rate_history ORDER BY rate_id DESC");
 
+        ResultSet rsHID = getHID.executeQuery();
+
+        int HID = (rsHID.next()) ? rsHID.getInt("rate_id") + 1 : 1;
+        
+        LocalDate start = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate end = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        
+        for(LocalDate date = start; date.isBefore(end); date = date.plusDays(1)) {
+            
+            PreparedStatement findPrice = con.prepareStatement(
+            "SELECT room_code, ocean_view, bed_type, base_price, rate\n" +
+            "FROM rooms\n" +
+            "LEFT JOIN special_room_rates ON (room = room_code) AND (? = book_date)\n" +
+            "WHERE room_code = ?;");
+
+            findPrice.setDate(1, java.sql.Date.valueOf(date));
+            findPrice.setInt(2, reservations.get(ind).getRoom());
+            
+            ResultSet rs = findPrice.executeQuery();
+            rs.next();
+            
+            double rate = rs.getDouble("rate");
+            if(rate == 0)
+                rate = rs.getDouble("base_price");
+            
+            resHist.setInt(1, HID);
+            resHist.setInt(2, ID);
+            resHist.setDate(3, java.sql.Date.valueOf(date));
+            resHist.setDouble(4,rate);
+        
+            resHist.executeUpdate();
+            HID++;
+        }
+        
         statement.close();
         con.commit();
         con.close();
+        
+        return "confirm";
     }
     
     public String showCustomerReservations() throws SQLException {
@@ -493,5 +593,113 @@ public class Reservations implements Serializable {
         statement.close();
         con.commit();
         con.close();
+    }
+    
+    public double calcRoomPrice() throws SQLException {
+        double sum = 0;
+        Connection con = dbConnect.getConnection();
+
+        if (con == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        
+        con.setAutoCommit(false);
+        
+        LocalDate start = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate end = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        
+        for(LocalDate date = start; date.isBefore(end); date = date.plusDays(1)) {
+            
+            PreparedStatement findPrice = con.prepareStatement(
+            "SELECT room_code, ocean_view, bed_type, base_price, rate\n" +
+            "FROM rooms\n" +
+            "LEFT JOIN special_room_rates ON (room = room_code) AND (? = book_date)\n" +
+            "WHERE room_code = ?;");
+
+            findPrice.setDate(1, java.sql.Date.valueOf(date));
+            findPrice.setInt(2, reservations.get(ind).getRoom());
+            
+            ResultSet rs = findPrice.executeQuery();
+            rs.next();
+            double rate = rs.getDouble("rate");
+            if(rate == 0)
+                rate = rs.getDouble("base_price");
+            sum += rate;
+            System.out.println("Room: " + reservations.get(ind).getRoom());
+            System.out.println(rate);
+        }
+      
+        con.commit();
+        con.close();
+        
+        return sum;
+    }
+    
+    public void findCheckoutRes() throws SQLException {
+        Connection con = dbConnect.getConnection();
+
+        if (con == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        
+        con.setAutoCommit(false);
+        
+        PreparedStatement checkoutRooms = con.prepareStatement(
+            "SELECT *\n" +
+            "FROM room_rate_history\n" +
+            "WHERE reservation = ?");
+        
+        checkoutRooms.setInt(1, reservationID);
+        
+        ResultSet rs = checkoutRooms.executeQuery();
+        checkoutRes = new ArrayList<>();
+        while(rs.next()) {
+            checkoutRes.add(new CheckoutRes(rs.getDate("res_date"), rs.getDouble("rate")));
+        }
+        
+        con.commit();
+        con.close();
+    }
+    
+    public double total() throws SQLException {
+        double sum = 0;
+        Connection con = dbConnect.getConnection();
+
+        if (con == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        
+        con.setAutoCommit(false);
+        
+        PreparedStatement totalCost = con.prepareStatement(
+            "SELECT SUM(total)\n" +
+            "FROM\n" +
+            "   (SELECT *\n" +
+            "   FROM\n" +
+            "      (SELECT SUM(rate) AS total\n" +
+            "      FROM room_rate_history\n" +
+            "      WHERE reservation = ? )AS room_total\n" +
+            "    --   AND current_date >= res_date) AS room_total\n" +
+            "   UNION\n" +
+            "   SELECT *\n" +
+            "   FROM\n" +
+            "      (SELECT SUM(cost) AS total\n" +
+            "      FROM additional_charges_invoices\n" +
+            "      INNER JOIN additional_charges\n" +
+            "      ON charge = charge_code\n" +
+            "      WHERE reservation = ? )AS additional_total\n" +
+            "    --   AND current_date >= charge_date) AS additional_total\n" +
+            "\n" +
+            "   ) AS combined_total;");
+        
+        totalCost.setInt(1, reservationID);
+        totalCost.setInt(2, reservationID);
+        
+        ResultSet rs = totalCost.executeQuery();
+        rs.next();
+        sum = rs.getDouble("sum");
+        con.commit();
+        con.close();
+        return sum;
     }
 }

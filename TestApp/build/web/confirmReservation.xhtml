@@ -1,19 +1,22 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
+        <c:set var="ind" value="#{reservations.ind}" scope="request"/>
+        <c:set var="res" value="#{reservations.reservations.get(ind)}" scope="request"/>
         <h:form>
             <p>Confirm your reservation details</p>
-            <p>Check In Date: </p>
-            <p>Check Out Date: </p>
-            <p>Room Number: </p>
-            <p>View Type: </p>
-            <p>Bed Type: </p>
-            <p>Booking Price:</p>
+            <p>Check In Date: #{reservations.startDate}</p>
+            <p>Check Out Date: #{reservations.endDate}</p>
+            <p>Room Number: #{res.room}</p>
+            <p>Ocean View: #{res.ocean_view}</p>
+            <p>Bed Type: #{res.bed_type}</p>
+            <p>Booking Price: #{reservations.calcRoomPrice()}</p>
             <h:commandButton value="Book Room" action="#{reservations.createReservation}"> </h:commandButton>
         </h:form>
     </h:body>

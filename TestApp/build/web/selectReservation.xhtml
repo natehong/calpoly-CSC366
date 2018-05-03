@@ -12,12 +12,7 @@
             <h:selectOneMenu value="#{reservations.ind}">
                 <f:selectItems value="#{reservations.listIndex}"/>
             </h:selectOneMenu>
-            <h:dataTable id="res" border="10" value="#{reservations.reservations}" var="reservation">
-<!--                <h:column>
-                    <h:selectOneRadio onclick="uncheckRadioButtons(this);" value = "{reservations.ind}">
-                        <f:selectItem itemValue = "{reservation.index}" itemLabel = "" />
-                    </h:selectOneRadio>
-                </h:column>-->
+                <h:dataTable id="res" border="10" value="#{reservations.reservations}" var="reservation">
                     <h:column>
                         <f:facet name = "header">
                             <h:outputText value = "Num"/>

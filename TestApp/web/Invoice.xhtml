@@ -8,32 +8,47 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:dataTable id="invoice" border="4" value="invoiceArray" var="invoice"  style="float:left">
-<!--                <h:column>
-                    <h:selectOneRadio onclick="uncheckRadioButtons(this);" value = "{reservations.ind}">
-                        <f:selectItem itemValue = "{reservation.index}" itemLabel = "" />
-                    </h:selectOneRadio>
-                </h:column>-->
-                    <h:column>
-                        <f:facet name = "header">
-                           <h:outputText value = "Charge Name"/>
-                        </f:facet>
-                        <p>class.Name <!--#{item.code}--></p>
-                    </h:column>
-                    <h:column>
-                        <f:facet name = "header">
-                           <h:outputText value = "Price"/>
-                        </f:facet>
-                        <p>class.desc <!--#{item.desc}--></p>
-                    </h:column>
+            <h:dataTable id="invoice" border="4" value="#{items.invoice}" var="invoice"  style="float:left">
+                <h:column>
+                    <f:facet name = "header">
+                       <h:outputText value = "Description"/>
+                    </f:facet>
+                    <p>#{invoice.desc}</p>
+                </h:column>
+                <h:column>
+                    <f:facet name = "header">
+                        <h:outputText value = "Base Price"/>
+                    </f:facet>
+                    <p>$#{invoice.price}</p>
+                </h:column>
                 <h:column>
                     <f:facet name = "header">
                         <h:outputText value = "Quantity"/>
                     </f:facet>
-                    <p>class.quantity <!--$#{item.price}--></p>
+                    <p>#{invoice.quantity}</p>
+                </h:column>
+                <h:column>
+                    <f:facet name = "header">
+                        <h:outputText value = "Total Cost"/>
+                    </f:facet>
+                    <p>$#{invoice.total_cost}</p>
                 </h:column>
             </h:dataTable>
-            
+            <h:dataTable id="a" border="4" value="#{reservations.checkoutRes}" var="rooms"  style="float:left">
+                <h:column>
+                    <f:facet name = "header">
+                       <h:outputText value = "Date"/>
+                    </f:facet>
+                    <p>#{rooms.res_date}</p>
+                </h:column>
+                <h:column>
+                    <f:facet name = "header">
+                        <h:outputText value = "Price"/>
+                    </f:facet>
+                    <p>$#{rooms.price}</p>
+                </h:column>
+            </h:dataTable>
+            <h3>Total Cost: $#{reservations.total()}$</h3>
             <h:commandButton value="CheckOut" action="#{reservations.checkOut}" />
         </h:form>
     </h:body>
