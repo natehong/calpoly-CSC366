@@ -24,6 +24,7 @@ CREATE TABLE employees (
    password VARCHAR(25) NOT NULL,
    first_name VARCHAR(25) NOT NULL,
    last_name VARCHAR(25) NOT NULL,
+   admin BOOL NOT NULL,
    PRIMARY KEY (emp_id)
 );
 

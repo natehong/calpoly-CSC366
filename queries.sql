@@ -55,8 +55,11 @@ FROM room_rate_history
 WHERE reservation = REQUESTED_res_code
 AND current_date >= res_date;
 
+--
+-- DEREK LOOK - UPDATED
+--
 -- calculate total charge for additional charges
-SELECT SUM(cost) AS additional_charges_total
+SELECT SUM(cost * quantity) AS additional_charges_total
 FROM additional_charges_invoices
 INNER JOIN additional_charges ON charge = charge_code
 WHERE reservation = REQUESTED_res_code
@@ -128,3 +131,11 @@ room_code NOT IN
    AND ((check_in BETWEEN REQUESTED_check_in AND REQUESTED_check_out)
    OR (check_out BETWEEN REQUESTED_check_in AND REQUESTED_check_out)))
 ORDER BY room_code;
+
+-- use this to add admin attribute to employee table and set an employee as an admin
+ALTER TABLE employees
+ADD COLUMN admin BOOL;
+
+UPDATE employees
+SET admin = 'true'
+WHERE emp_id = 11111;
