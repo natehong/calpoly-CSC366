@@ -8,6 +8,7 @@
     </h:head>
     <h:body>
         Available Rooms
+        <h:commandButton value="Back" action="back"></h:commandButton>
         <h:dataTable id="res" border="10" value="#{reservations.allReservations}" var="reservation">
             <h:column>
                 <f:facet name = "header">

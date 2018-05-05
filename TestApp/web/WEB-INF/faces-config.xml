@@ -23,6 +23,15 @@
     </navigation-rule>
     
     <navigation-rule>
+        <from-view-id>/NewUserPg.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>back</from-outcome>
+            <to-view-id>index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
         <from-view-id>/EmployeeLogin.xhtml</from-view-id>
          <navigation-case>
             <from-outcome>UserLogin</from-outcome>
@@ -50,7 +59,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>addCharge</from-outcome>
-            <to-view-id>createAdditionalCharge.xhtml</to-view-id>
+            <to-view-id></to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -66,10 +75,42 @@
     </navigation-rule>
     
     <navigation-rule>
+        <from-view-id>/createAdditionalCharge.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>back</from-outcome>
+            <to-view-id>EmployeeHomePage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/viewAvailableRooms.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>back</from-outcome>
+            <to-view-id>EmployeeHomePage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
         <from-view-id>/customerCheckout.xhtml</from-view-id>
          <navigation-case>
             <from-outcome>invoice</from-outcome>
             <to-view-id>Invoice.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+         <navigation-case>
+            <from-outcome>back</from-outcome>
+            <to-view-id>EmployeeHomPage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/Invoice.xhtml</from-view-id>
+         <navigation-case>
+            <from-outcome>back</from-outcome>
+            <to-view-id>customerCheckout.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -93,6 +134,68 @@
         </navigation-case>
     </navigation-rule>
     
+    <navigation-rule>
+        <from-view-id>/currentReservation.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>back</from-outcome>
+            <to-view-id>UserHomepage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+   
+    <navigation-rule>
+        <from-view-id>/additionalChargeMenu.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>back</from-outcome>
+            <to-view-id>UserHomepage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>              
+    
+    <navigation-rule>
+        <from-view-id>/createReservation.xhtml</from-view-id>
+         <navigation-case>
+            <from-outcome>selectRes</from-outcome>
+            <to-view-id>selectReservation.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>back</from-outcome>
+            <to-view-id>UserHomepage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/selectReservation.xhtml</from-view-id>
+         <navigation-case>
+            <from-outcome>confirmReservation</from-outcome>
+            <to-view-id>confirmReservation.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>back</from-outcome>
+            <to-view-id>createReservation.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>    
+    
+    <navigation-rule>
+        <from-view-id>/confirmReservation.xhtml</from-view-id>
+         <navigation-case>
+            <from-outcome>confirm</from-outcome>
+            <to-view-id>UserHomepage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <from-view-id>/confirmReservation.xhtml</from-view-id>
+         <navigation-case>
+            <from-outcome>back</from-outcome>
+            <to-view-id>selectReservation.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>    
+
+
     <navigation-rule>
         <from-view-id>/AdminHomePage.xhtml</from-view-id>
         <navigation-case>
@@ -118,29 +221,31 @@
     </navigation-rule>
     
     <navigation-rule>
-        <from-view-id>/createReservation.xhtml</from-view-id>
-         <navigation-case>
-            <from-outcome>selectRes</from-outcome>
-            <to-view-id>selectReservation.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>/selectReservation.xhtml</from-view-id>
-         <navigation-case>
-            <from-outcome>confirmReservation</from-outcome>
-            <to-view-id>confirmReservation.xhtml</to-view-id>
+        <from-view-id>/createEmployee.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>back</from-outcome>
+            <to-view-id>AdminHomePage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>    
-    
+
     <navigation-rule>
-        <from-view-id>/confirmReservation.xhtml</from-view-id>
-         <navigation-case>
-            <from-outcome>confirm</from-outcome>
-            <to-view-id>UserHomepage.xhtml</to-view-id>
+        <from-view-id>/changeUserPassword.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>back</from-outcome>
+            <to-view-id>AdminHomePage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>    
+ 
+    <navigation-rule>
+        <from-view-id>/alterRoomPrice.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>back</from-outcome>
+            <to-view-id>AdminHomePage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule> 
+        
+                               
 </faces-config>

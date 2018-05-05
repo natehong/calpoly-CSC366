@@ -24,10 +24,7 @@
                 <h:inputText value="#{items.cost}" id="cost" required="true"></h:inputText>
             </p>
 
-            <h:commandButton value="Create Item" type="reset" action="#{items.createItem}">
-            </h:commandButton>
-            <h:outputScript rendered="#{items.itemCreated}">
-            </h:outputScript>
+            <h:commandButton value="Create Item" action="#{items.createItem}"></h:commandButton>
 
         </h:form>
 

@@ -3,17 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/web/currentReservation.xhtml</file>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/package/Reservations.java</file>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/web/customerCheckout.xhtml</file>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/package/SpecialRoom.java</file>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/web/EmployeeLogin.xhtml</file>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/web/Invoice.xhtml</file>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/package/Login.java</file>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/web/UserHomepage.xhtml</file>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/package/Item.java</file>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/package/Items.java</file>
-            <file>file:/home/derek/NetBeansProjects/calpoly-csc366-program1/TestApp/web/WEB-INF/faces-config.xml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/createAdditionalCharge.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/alterRoomPrice.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/Invoice.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/NewUserPg.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/changeUserPassword.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/WEB-INF/faces-config.xml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/customerCheckout.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/currentReservation.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/createEmployee.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/confirmReservation.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/selectReservation.xhtml</file>
+            <file>file:/C:/Users/Patrick/Documents/GitHub/calpoly-csc366-program1/TestApp/web/createReservation.xhtml</file>
         </group>
     </open-files>
 </project-private>

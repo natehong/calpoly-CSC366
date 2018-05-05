@@ -120,12 +120,13 @@ public class CreateEmployee implements Serializable {
         ID = (rsID.next()) ? rsID.getInt("emp_id") + 1 : 1;
         
         PreparedStatement createEmp = con.prepareStatement(
-            "INSERT INTO employees VALUES(?,?,?,?)");
+            "INSERT INTO employees VALUES(?,?,?,?,?)");
         
         createEmp.setInt(1, ID);
         createEmp.setString(2, password);
         createEmp.setString(3, firstName);
         createEmp.setString(4, lastName);
+        createEmp.setBoolean(5, false);
         
         createEmp.executeUpdate();
         statement.close();
