@@ -674,7 +674,7 @@ public class Reservations implements Serializable {
         PreparedStatement checkoutRooms = con.prepareStatement(
             "SELECT *\n" +
             "FROM room_rate_history\n" +
-            "WHERE reservation = ?");
+            "WHERE reservation = ? AND current_date >= res_date");
         
         checkoutRooms.setInt(1, reservationID);
         
@@ -705,8 +705,8 @@ public class Reservations implements Serializable {
             "   FROM\n" +
             "      (SELECT SUM(rate) AS total\n" +
             "      FROM room_rate_history\n" +
-            "      WHERE reservation = ? )AS room_total\n" +
-            "    --   AND current_date >= res_date) AS room_total\n" +
+            "      WHERE reservation = ?\n" +
+            "      AND current_date >= res_date) AS room_total\n" +
             "   UNION\n" +
             "   SELECT *\n" +
             "   FROM\n" +
@@ -714,8 +714,8 @@ public class Reservations implements Serializable {
             "      FROM additional_charges_invoices\n" +
             "      INNER JOIN additional_charges\n" +
             "      ON charge = charge_code\n" +
-            "      WHERE reservation = ? )AS additional_total\n" +
-            "    --   AND current_date >= charge_date) AS additional_total\n" +
+            "      WHERE reservation = ? \n" +
+            "      AND current_date >= charge_date) AS additional_total\n" +
             "\n" +
             "   ) AS combined_total;");
         
