@@ -46,7 +46,11 @@
                     <p>#{reservation.roomType}</p>
                 </h:column>
             </h:dataTable>
-            <h:inputText value="#{reservations.reservationID}" id="ResID" required="true"></h:inputText>
+            <h:inputText value="#{reservations.reservationID}"
+                         validatorMessage="Cannot delete a reservation that is already past."
+                         validator="#{reservations.validateDelete}"
+                         id="ResID" 
+                         required="true"></h:inputText>
             <h:commandButton value="Submit" action="#{reservations.cancelReservation}" />
         </h:form>
     </h:body>

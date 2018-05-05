@@ -20,11 +20,6 @@
             <to-view-id>UserHomepage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
-        <navigation-case>
-            <from-outcome>TempAdmin</from-outcome>
-            <to-view-id>AdminHomePage.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
     </navigation-rule>
     
     <navigation-rule>
@@ -37,6 +32,11 @@
         <navigation-case>
             <from-outcome>Login</from-outcome>
             <to-view-id>EmployeeHomePage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>adminLogin</from-outcome>
+            <to-view-id>AdminHomePage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

@@ -31,6 +31,7 @@ import javax.faces.validator.ValidatorException;
 public class Login implements Serializable {
 
     private String username = "", password = "";
+    private boolean admin = false;
     private int emp_id = 0;
     
     private DBConnect dbConnect = new DBConnect();
@@ -82,6 +83,7 @@ public class Login implements Serializable {
         // uses an incorrect login
         // the exception will print an error message on the page definded by validator message
         String pass;
+        admin = false;
         Connection con = dbConnect.getConnection();
         
         if (con == null) {
@@ -122,6 +124,7 @@ public class Login implements Serializable {
         // uses an incorrect login
         // the exception will print an error message on the page definded by validator message
         String pass;
+        admin = false;
         Connection con = dbConnect.getConnection();
 
         if (con == null) {
@@ -130,7 +133,7 @@ public class Login implements Serializable {
         con.setAutoCommit(false);
                 
         PreparedStatement validateAcc = con.prepareStatement(
-            "SELECT emp_id, password FROM employees WHERE emp_id = ?");
+            "SELECT emp_id, password, admin FROM employees WHERE emp_id = ?");
         
         emp_id = (Integer) loginUI.getValue();
         password = value.toString();
@@ -146,6 +149,7 @@ public class Login implements Serializable {
                 FacesMessage errorMessage = new FacesMessage("Wrong id/password");
                 throw new ValidatorException(errorMessage);
             }
+            admin = rs.getBoolean("admin");
         }
         else if(emp_id == 0 && password.equals("")) {
             
@@ -157,6 +161,8 @@ public class Login implements Serializable {
     }
     public String go() {
         // login success go to home page
+        if(admin)
+            return "adminLogin";
         return "Login";
     }
 

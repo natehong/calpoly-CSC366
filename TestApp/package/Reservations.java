@@ -23,6 +23,7 @@ import javax.faces.application.FacesMessage;
 import javax.inject.Named;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
@@ -327,6 +328,28 @@ public class Reservations implements Serializable {
         this.allReservations = allReservations;
     }
     
+    public void validateDelete(FacesContext context, UIComponent component, Object value) 
+            throws ValidatorException, SQLException {
+        reservationID = (Integer) value;
+        Connection con = dbConnect.getConnection();
+        
+        if (con == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        con.setAutoCommit(false);
+        
+        PreparedStatement validateDelete = con.prepareStatement(
+            "SELECT * FROM reservations WHERE res_code = ? \n" +
+            "AND check_in < current_date");
+        validateDelete.setInt(1, reservationID);
+        
+        ResultSet rs = validateDelete.executeQuery();
+        if(rs.next()) {
+            FacesMessage errorMessage = new FacesMessage("Cannot delete a reservation that has already past.");
+            throw new ValidatorException(errorMessage);
+        }
+ 
+    }
     public String findReservation() throws SQLException {
         int index = 0;
         boolean view = false;
@@ -574,17 +597,17 @@ public class Reservations implements Serializable {
         PreparedStatement deleteRes = con.prepareStatement(
             "DELETE FROM reservations\n" +
             "WHERE res_code = ?\n" +
-            "AND current_date > check_in;");
+            "AND current_date < check_in;");
         
         PreparedStatement deleteCharges = con.prepareStatement(
             "DELETE FROM additional_charges_invoices\n" +
             "WHERE reservation = ?\n" +
-            "AND current_date > charge_date;");
+            "AND current_date < charge_date;");
         
         PreparedStatement deleteHistory = con.prepareStatement(
             "DELETE FROM room_rate_history\n" +
             "WHERE reservation = ?\n" +
-            "AND current_date > res_date;");
+            "AND current_date < res_date;");
         
         deleteRes.setInt(1, reservationID);
         deleteCharges.setInt(1, reservationID);
