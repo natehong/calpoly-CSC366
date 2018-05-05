@@ -5,13 +5,14 @@ VALUES
 ('pm', 'password3', 'Patrick', 'Malapira', 'pm@gmail.com', 94536, 'C street', 'Fremont', 95632, 3030303030303030, '2017-03-03', 333),
 ('js', 'password69', 'Japji', 'Singh', 'js@gmail.com', 92501, '69 street', 'Flavortown', 95632, 6969696969696969, '2017-06-09', 666);
 
-INSERT INTO employees (emp_id, password, first_name, last_name)
+INSERT INTO employees (emp_id, password, first_name, last_name, admin)
 VALUES
-(11111, 'password1', 'f1', 'l1'),
-(22222, 'password2', 'f2', 'l2'),
-(33333, 'password3', 'f3', 'l3'),
-(44444, 'password4', 'f4', 'l4'),
-(55555, 'password5', 'f5', 'l5');
+(11111, 'password1', 'f1', 'l1', 'false'),
+(22222, 'password2', 'f2', 'l2', 'false'),
+(33333, 'password3', 'f3', 'l3', 'false'),
+(44444, 'password4', 'f4', 'l4', 'false'),
+(55555, 'password5', 'f5', 'l5', 'false'),
+(99999, 'admin', 'a1', 'l1', 'true');
 
 INSERT INTO rooms (room_code, ocean_view, bed_type, base_price)
 VALUES
