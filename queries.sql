@@ -90,7 +90,7 @@ FROM
    UNION
    SELECT *
    FROM
-      (SELECT SUM(cost) AS total
+      (SELECT SUM(cost * quantity) AS total
       FROM additional_charges_invoices
       INNER JOIN additional_charges
       ON charge = charge_code

@@ -13,8 +13,11 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
+import javax.annotation.PostConstruct;
 import javax.el.ELContext;
 import javax.faces.application.FacesMessage;
 import javax.inject.Named;
@@ -52,7 +55,7 @@ public class Reservations implements Serializable {
     private List<UserReservations> userReservations;
 
     private DBConnect dbConnect = new DBConnect();
-    
+        
     public class CheckoutRes implements Serializable {
         private Date res_date;
         private double price;
@@ -383,13 +386,14 @@ public class Reservations implements Serializable {
         Statement statement = con.createStatement();
         
         con.setAutoCommit(false);
+       
+        PreparedStatement checkout = con.prepareStatement(
+             "UPDATE reservations SET check_out = ? WHERE res_code = ?");
         
-
+        checkout.setDate(1, java.sql.Date.valueOf(java.time.LocalDate.now()));
+        checkout.setInt(2, reservationID);
         
-        PreparedStatement createRes = con.prepareStatement(
-             "INSERT INTO reservations VALUES(?,?,?,?,?)");
-    
-        createRes.executeUpdate();
+        checkout.executeUpdate();
 
         statement.close();
         con.commit();

@@ -39,9 +39,9 @@ public class Login implements Serializable {
 
     @PostConstruct
     public void init() {
-        System.out.println("Setting Time Zone to UTC-8:00");
+        System.out.println("Setting Time Zone to PDT");
         TimeZone timeZone;
-        timeZone = TimeZone.getTimeZone("UTC-8:00");
+        timeZone = TimeZone.getTimeZone("America/Los_Angeles");
         TimeZone.setDefault(timeZone);
     }
     public UIInput getLoginUI() {
