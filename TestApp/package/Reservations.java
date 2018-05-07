@@ -399,7 +399,7 @@ public class Reservations implements Serializable {
         return "selectRes";
     }
     
-    public void checkout() throws SQLException {
+    public String checkout() throws SQLException {
             Connection con = dbConnect.getConnection();
 
         if (con == null) {
@@ -421,6 +421,8 @@ public class Reservations implements Serializable {
         statement.close();
         con.commit();
         con.close();
+        
+        return "EmployeeHomePage";
     }   
     
     public String createReservation() throws SQLException {

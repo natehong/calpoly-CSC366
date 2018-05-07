@@ -34,6 +34,7 @@ public class Admin implements Serializable {
     private int emp_id;
     private String currPassword, newPassword;
     private UIInput emp_idUI, newPassUI;
+    
     private DBConnect dbConnect = new DBConnect();
 
     public int getEmp_id() {
@@ -135,5 +136,12 @@ public class Admin implements Serializable {
             FacesMessage errorMessage = new FacesMessage("Wrong login/password");
             throw new ValidatorException(errorMessage);
         }
+    }
+    
+    public String logout() {
+        emp_id = 0;
+        currPassword = "";
+        newPassword = "";
+        return "EmployeeLogin";
     }
 }

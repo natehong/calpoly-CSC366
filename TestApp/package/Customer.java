@@ -30,4 +30,8 @@ public class Customer implements Serializable {
         return login.getUsername();
     }
     
+    public String logout() {
+        customer = "";
+        return "index";
+    }
 }

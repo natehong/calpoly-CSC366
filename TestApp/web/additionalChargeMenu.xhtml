@@ -22,11 +22,6 @@
             <p><br style="clear:both" /></p>    
             
             <h:dataTable id="item" border="4" value="#{items.items}" var="item"  style="float:left">
-<!--                <h:column>
-                    <h:selectOneRadio onclick="uncheckRadioButtons(this);" value = "{reservations.ind}">
-                        <f:selectItem itemValue = "{reservation.index}" itemLabel = "" />
-                    </h:selectOneRadio>
-                </h:column>-->
                     <h:column>
                         <f:facet name = "header">
                            <h:outputText value = "chargeCode"/>
@@ -47,11 +42,7 @@
                 </h:column>
             </h:dataTable>
             <h:dataTable id="res" border="4" value="#{reservations.userReservations}" var="reservation" style="float:left">
-<!--                <h:column>
-                    <h:selectOneRadio onclick="uncheckRadioButtons(this);" value = "{reservations.ind}">
-                        <f:selectItem itemValue = "{reservation.index}" itemLabel = "" />
-                    </h:selectOneRadio>
-                </h:column>-->
+
                     <h:column>
                         <f:facet name = "header">
                             <h:outputText value = "Reservation Code"/>

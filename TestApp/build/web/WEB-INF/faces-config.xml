@@ -59,7 +59,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>addCharge</from-outcome>
-            <to-view-id></to-view-id>
+            <to-view-id>createAdditionalCharge.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -101,7 +101,7 @@
         </navigation-case>
          <navigation-case>
             <from-outcome>back</from-outcome>
-            <to-view-id>EmployeeHomPage.xhtml</to-view-id>
+            <to-view-id>EmployeeHomePage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -187,7 +187,6 @@
             <to-view-id>UserHomepage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
-        <from-view-id>/confirmReservation.xhtml</from-view-id>
          <navigation-case>
             <from-outcome>back</from-outcome>
             <to-view-id>selectReservation.xhtml</to-view-id>

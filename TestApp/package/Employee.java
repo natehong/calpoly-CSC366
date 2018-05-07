@@ -31,4 +31,8 @@ public class Employee implements Serializable {
         return login.getEmp_id();
     }
     
+    public String logout() {
+        employee = 0;
+        return "EmployeeLogin";
+    }
 }
