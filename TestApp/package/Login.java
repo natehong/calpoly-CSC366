@@ -109,9 +109,9 @@ public class Login implements Serializable {
                 throw new ValidatorException(errorMessage);
             }
         }
-        else if(username.equals("") && password.equals("")) {
-            
-        }
+//        else if(username.equals("") && password.equals("")) {
+//            
+//        }
         else {
             FacesMessage errorMessage = new FacesMessage("Wrong login/password");
             throw new ValidatorException(errorMessage);
@@ -151,9 +151,9 @@ public class Login implements Serializable {
             }
             admin = rs.getBoolean("admin");
         }
-        else if(emp_id == 0 && password.equals("")) {
-            
-        }
+//        else if(emp_id == 0 && password.equals("")) {
+//            
+//        }
         else {
             FacesMessage errorMessage = new FacesMessage("Wrong id/password");
             throw new ValidatorException(errorMessage);
